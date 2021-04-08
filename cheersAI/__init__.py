@@ -28,3 +28,4 @@ application.config['SWAGGER'] = {
 
 swagger = Swagger(application, template=template)
 from cheersAI import routes
+from cheersAI import api

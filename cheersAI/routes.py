@@ -11,13 +11,14 @@ configure_uploads(application, photos)
 @application.route("/dr", methods=['GET', 'POST'])
 @basic_auth.required
 def dr():
+    filename = None
     if request.method == 'POST' and 'photo' in request.files:
         try:
-            photos.save(request.files['photo'])
+            filename = photos.save(request.files['photo'])
             flash("Photo saved successfully.")
         except UploadNotAllowed:
             flash("Failed. Please select jpeg, jpg or png.")
-        return render_template('dr.html')
+        return render_template('dr.html', filename=filename)
     return render_template('dr.html')
 
 

@@ -17,8 +17,13 @@
 <form method=POST enctype=multipart/form-data action="{{ url_for('dr') }}">
 <input type=file name=photo>
 <button type="submit">Submit</button>
+
 </form>
 
+<br />
 
+{% if filename %}
+    <img src="{{ url_for('static', filename='uploaded_img/') }}{{filename}}" width="512" height="512" />
+{% endif %}
 
 {% endblock %}

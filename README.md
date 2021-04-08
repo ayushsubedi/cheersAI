@@ -35,7 +35,7 @@
 `$env:FLASK_APP="app.py"`
 `flask run`
 
-### Running with docker
+## Running with docker
 
 ```
 if __name__ == '__main__':

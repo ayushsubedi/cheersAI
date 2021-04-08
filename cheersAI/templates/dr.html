@@ -24,6 +24,8 @@
 
 {% if filename %}
     <img src="{{ url_for('static', filename='uploaded_img/') }}{{filename}}" width="512" height="512" />
+    <br />
+    Diabetic Retinopathy Prediction (Level): {{prediction}}
 {% endif %}
 
 {% endblock %}

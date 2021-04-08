@@ -3,7 +3,7 @@ from flask import render_template, request, flash
 from cheersAI import basic_auth
 from flask_uploads import IMAGES, UploadSet, configure_uploads
 
-photos = UploadSet("photos", IMAGES)
+photos = UploadSet("photos")
 
 configure_uploads(application, photos)
 

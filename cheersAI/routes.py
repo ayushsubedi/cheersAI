@@ -4,4 +4,4 @@ from flask import render_template
 
 @application.route('/')
 def index():
-    return 'future home of cheersAI'
+    return render_template("dashboard.html")

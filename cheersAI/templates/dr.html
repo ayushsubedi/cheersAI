@@ -2,4 +2,23 @@
 {% block content %}
 <h1 class="title">Diabetic Retinopathy Prediction</h1>
 <h2 class="subtitle">Future home of Diabetic Retinopathy Prediction</h2>
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+{% for message in messages %}
+    <li>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<form method=POST enctype=multipart/form-data action="{{ url_for('dr') }}">
+<input type=file name=photo>
+<button type="submit">Submit</button>
+</form>
+
+
+
 {% endblock %}

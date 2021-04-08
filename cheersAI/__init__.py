@@ -1,7 +1,9 @@
 from flask import Flask
+import os
 from os import environ
 from flask_basicauth import BasicAuth
 from flasgger import Swagger
+
 
 application = Flask(__name__)
 basic_auth = BasicAuth(application)
@@ -12,6 +14,9 @@ application.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 # Basic auth
 application.config['BASIC_AUTH_USERNAME'] = environ.get('BASIC_AUTH_USERNAME')
 application.config['BASIC_AUTH_PASSWORD'] = environ.get('BASIC_AUTH_PASSWORD')
+
+application.config["UPLOADED_PHOTOS_DEST"] = "static/uploaded_img"
+
 
 template = {
     "swagger": "2.0",

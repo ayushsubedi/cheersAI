@@ -1,17 +1,12 @@
 
+![Image of Yaktocat](https://github.com/CHEERS-Hospital/cheersAI/blob/main/cheersAI/static/img/logo.png?raw=true)
+
+
 # Installation
 
 #### Clone the repository
 
-`https://github.com/ayushsubedi/empty_flask/`
-
-### Rename
-
-Rename empty_flask (folders and imports) to new project name
-
-### Change remote url 
-
-`git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`
+`https://github.com/ayushsubedi/cheersAI/`
 
 
 #### CD into the cloned directory and create a virtualenv

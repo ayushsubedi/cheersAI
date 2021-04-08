@@ -34,3 +34,16 @@
 ### Run flask app (windows)
 `$env:FLASK_APP="app.py"`
 `flask run`
+
+### Running with docker
+
+```
+if __name__ == '__main__':
+    application.run(host= '0.0.0.0', debug=True)
+```
+
+### Build
+```docker build -f Dockerfile -t docker_flask .```
+
+### Run
+```docker run -p 5000:5000 -ti docker_flask /bin/bash -c "cd /src && source activate ml && python run.py"```

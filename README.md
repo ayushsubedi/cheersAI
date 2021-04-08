@@ -2,6 +2,15 @@
 ![Image of Yaktocat](https://github.com/CHEERS-Hospital/cheersAI/blob/main/cheersAI/static/img/logo.png?raw=true)
 
 
+
+# Specification
+
+
+
+
+
+
+
 # Installation
 
 #### Clone the repository

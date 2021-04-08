@@ -4,27 +4,20 @@
 <h2 class="subtitle">Future home of Diabetic Retinopathy Prediction</h2>
 
 
-<title>Upload File</title>
-<h1>Photo Upload</h1>
-<form method="POST" enctype="multipart/form-data">
-     {{ form.hidden_tag() }}
-     {{ form.photo }}
-     {% for error in form.photo.errors %}
-         <span style="color: red;">{{ error }}</span>
-     {% endfor %}
-     {{ form.submit }}
-</form>
-
-{% if file_url %}
-<br>
-<img src="{{ file_url }}">
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+{% for message in messages %}
+    <li>{{ message }}</li>
+{% endfor %}
+</ul>
 {% endif %}
+{% endwith %}
 
-
-
-
-
-
+<form method=POST enctype=multipart/form-data action="{{ url_for('dr') }}">
+<input type=file name=photo>
+<button type="submit">Submit</button>
+</form>
 
 
 

@@ -5,7 +5,7 @@
 
 # Todos
 
-## Preliminary
+#### Preliminary
 - [x] create specification document
 - [x] create architecture requirements (ubuntu, nginx, mysql)
 - [ ] research storage for images
@@ -22,14 +22,14 @@
 - [ ] Create table schema
 
 
-# Engineering
+#### Engineering
 - [ ] Identify patient tracking
 - [ ] Create a simple dashboard 
 - [ ] Identify requirements for dashboard
 - [ ] Create a user auth system
 
 
-### APIs
+#### APIs
 - [ ] create list of APIs required
 
 

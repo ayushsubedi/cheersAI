@@ -8,7 +8,7 @@
 - [x] create architecture requirements (ubuntu, nginx, mysql)
 - [ ] research storage for images
 - [ ] create a mapping plan
-- [ ] create basic mockups
+- [x] create basic mockups
 - [x] Cheers fundus image has text label for left/right eye. Research on how this impacts ML
 - [x] If there is an impact, how to get around
 - [x] Create flask app

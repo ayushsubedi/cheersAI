@@ -5,7 +5,7 @@
 
 # Todos
 - [x] create specification document
-- [ ] create architecture requirements
+- [x] create architecture requirements (ubuntu, nginx, mysql)
 - [ ] create a mapping plan
 - [ ] create basic mockups
 - [x] Cheers fundus image has text label for left/right eye. Research on how this impacts ML

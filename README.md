@@ -32,10 +32,8 @@
 - [x] Use bulma or tailwind for CSS
 - [ ] Identify more UI/API todos
 
-
-
-
-
+# Mockup
+![](https://github.com/CHEERS-Hospital/cheersAI/blob/main/cheersAI/static/img/mockups.png?raw=true)
 
 # Installation
 

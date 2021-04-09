@@ -4,7 +4,7 @@
 
 
 # Todos
-- [ ] create specification document
+- [x] create specification document
 - [ ] create architecture requirements
 - [ ] create a mapping plan
 - [ ] create basic mockups
@@ -20,6 +20,7 @@
 - [ ] Create table schema
 - [ ] Identify patient tracking
 - [ ] Create a simple dashboard 
+- [ ] 
 
 
 #### User Interface/API

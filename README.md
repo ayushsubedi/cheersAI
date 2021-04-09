@@ -4,6 +4,8 @@
 
 
 # Todos
+
+## Preliminary
 - [x] create specification document
 - [x] create architecture requirements (ubuntu, nginx, mysql)
 - [ ] research storage for images
@@ -14,14 +16,18 @@
 - [x] Create flask app
 - [x] Create authentication for interface and API
 - [x] Create a mechanism to store uploaded files
-- [ ] Create a mechanism for seemless transitioning when models are updated
+- [x] Create a mechanism for seemless transitioning when models are updated
 - [ ] Identify more engineering problems
 - [ ] Figure out ways to deploy for staging
 - [ ] Create table schema
+
+
+# Engineering
 - [ ] Identify patient tracking
 - [ ] Create a simple dashboard 
 - [ ] Identify requirements for dashboard
 - [ ] Create a user auth system
+
 
 ### APIs
 - [ ] create list of APIs required

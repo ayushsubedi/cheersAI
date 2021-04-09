@@ -3,10 +3,11 @@
 
 
 
-# Specification
+# Todos
 - [ ] create specification document
 - [ ] create architecture requirements
 - [ ] create a mapping plan
+- [ ] create basic mockups
 
 
 

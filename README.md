@@ -4,7 +4,9 @@
 
 
 # Specification
-
+[ ] create specification document
+[ ] create architecture requirements
+[ ] create a mapping plan
 
 
 

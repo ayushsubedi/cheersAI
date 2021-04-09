@@ -8,8 +8,6 @@
 - [ ] create architecture requirements
 - [ ] create a mapping plan
 - [ ] create basic mockups
-- [ ] #### Engineering and Deployment
-- [ ] Create a specification documentation
 - [x] Cheers fundus image has text label for left/right eye. Research on how this impacts ML
 - [x] If there is an impact, how to get around
 - [x] Create flask app

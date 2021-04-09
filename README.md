@@ -15,13 +15,16 @@
 - [x] Create authentication for interface and API
 - [x] Create a mechanism to store uploaded files
 - [ ] Create a mechanism for seemless transitioning when models are updated
-- [ ] Add issue trackers
 - [ ] Identify more engineering problems
 - [ ] Figure out ways to deploy for staging
 - [ ] Create table schema
 - [ ] Identify patient tracking
 - [ ] Create a simple dashboard 
-- [ ] 
+- [ ] Identify requirements for dashboard
+- [ ] Create a user auth system
+
+### APIs
+- [ ] create list of APIs required
 
 
 #### User Interface/API

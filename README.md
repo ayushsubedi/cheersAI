@@ -21,6 +21,9 @@
 - [ ] Figure out ways to deploy for staging
 - [ ] Create table schema
 
+#### Forms
+- [ ] create input fields for PATIENT table name, age, gender, address, country, cheersID
+- [ ] 
 
 #### Engineering
 - [ ] Identify patient tracking
@@ -29,9 +32,13 @@
 - [ ] Create a user auth system
 - [ ] Identify other engineering todos
 
-
 #### APIs
 - [ ] create list of APIs required
+
+#### SCHEMA
+- [ ] PATIENT
+- [ ] USER
+- [ ] PATIENT_DIAGNOSIS_HISTORY
 
 
 #### User Interface/API

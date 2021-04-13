@@ -3,11 +3,15 @@ import os
 from os import environ
 from flask_basicauth import BasicAuth
 from flasgger import Swagger
+from flask_sqlalchemy import SQLAlchemy
 
 
 application = Flask(__name__)
 basic_auth = BasicAuth(application)
 
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cheersai.db'
+
+db = SQLAlchemy(application)
 # Secret key for form
 application.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 

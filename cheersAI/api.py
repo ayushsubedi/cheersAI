@@ -2,6 +2,8 @@
 from cheersAI import application
 from flask import Flask, request, jsonify
 import datetime
+from cheersAI.models import Patient
+from cheersAI import db
 
 @application.route('/api/test/', methods=['POST'])
 def add_test():
@@ -53,5 +55,25 @@ def api_patient_create():
         500:
             description: Something went wrong
     """
-      request_json = request.json
+      first_name = request.json['first_name']
+      last_name = request.json['last_name']
+      age = request.json['age']
+      gender = request.json['gender']
+      address = request.json['address']
+      country = request.json['country']
+      cheers_id = request.json['cheers_id']
+      new_patient = Patient(
+        first_name=first_name, 
+        last_name=last_name, 
+        age=age, 
+        gender=gender, 
+        address=address,
+        country=country,
+        cheers_id=cheers_id)
+      try:
+        db.session.add(new_patient)
+        db.session.commit()
+        return 'successful', 200
+      except Exception as e:
+        return str(e), 500
       return jsonify(request_json), 200

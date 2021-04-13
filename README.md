@@ -23,7 +23,8 @@
 
 #### Forms
 - [ ] create input fields for PATIENT table name, age, gender, address, country, cheersID
-- [ ] 
+- [ ] segregate PATIENT with other forms
+- [ ] SHOW, CREATE, EDIT, DELETE patients
 
 #### Engineering
 - [ ] Identify patient tracking

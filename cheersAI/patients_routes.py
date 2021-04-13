@@ -6,6 +6,6 @@ from flask import render_template, request
 def all_patients():
     return render_template('all_patients.html')
 
-@application.route("/create_patient", methods=['GET'])
-def create_patient():
+@application.route("/patient/create", methods=['GET'])
+def patient_create():
     return render_template('create_patient.html')

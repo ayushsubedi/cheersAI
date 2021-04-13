@@ -7,6 +7,10 @@ def all_patients():
     return render_template('all_patients.html')
 
 
+@application.route("/all_users", methods=['GET'])
+def all_users():
+    return render_template('all_users.html')
+
 @application.route('/')
 def index():
     return render_template("dashboard.html")

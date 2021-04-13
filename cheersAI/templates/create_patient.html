@@ -2,44 +2,107 @@
 {% block content %}
 <h1 class="title">Create New Patient</h1>
 
-<form method="POST" action="">
+<form method="POST" action="{{url_for('patient_create')}}">
    {{form.hidden_tag()}}
 
    <div class="field is-inline-block-desktop">
       {{form.cheers_id.label(class="label")}}
+      {% if form.cheers_id.errors %}
+         {{form.cheers_id(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.cheers_id.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
       {{form.cheers_id(class="input")}}
+      {% endif %} 
    </div>
 
    <div class="field-group">
       <div class="field is-inline-block-desktop">
          {{form.first_name.label(class="label")}}
-         {{form.first_name(class="input")}}
+         {% if form.first_name.errors %}
+         {{form.first_name(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.first_name.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
+      {{form.first_name(class="input")}}
+      {% endif %} 
       </div>
       <div class="field is-inline-block-desktop">
          {{form.last_name.label(class="label")}}
-         {{form.last_name(class="input")}}
+         {% if form.last_name.errors %}
+         {{form.last_name(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.last_name.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
+      {{form.last_name(class="input")}}
+      {% endif %} 
       </div>
    </div>
 
    <div class="field-group">
       <div class="field is-inline-block-desktop">
          {{form.age.label(class="label")}}
-         {{form.age(class="input")}}
+         {% if form.age.errors %}
+         {{form.age(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.age.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
+      {{form.age(class="input")}}
+      {% endif %} 
       </div>
       <div class="field is-inline-block-desktop">
          {{form.gender.label(class="label")}}
-         {{form.gender(class="input")}}
+         {% if form.gender.errors %}
+         {{form.gender(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.gender.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
+      {{form.gender(class="input")}}
+      {% endif %} 
       </div>
    </div>
 
    <div class="field-group">
       <div class="field is-inline-block-desktop">
          {{form.address.label(class="label")}}
-         {{form.address(class="input")}}
+         {% if form.address.errors %}
+         {{form.address(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.address.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
+      {{form.address(class="input")}}
+      {% endif %} 
       </div>
       <div class="field is-inline-block-desktop">
          {{form.country.label(class="label")}}
-         {{form.country(class="input")}}
+         {% if form.country.errors %}
+         {{form.country(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.country.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
+      {{form.country(class="input")}}
+      {% endif %}
       </div>
    </div>
    {{form.submit(class='button is-link')}}

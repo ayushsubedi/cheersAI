@@ -26,3 +26,32 @@ def add_test():
     """
       request_json = request.json
       return jsonify(request_json), 200
+
+
+@application.route('/api/patient/create', methods=['POST'])
+def api_patient_create():
+      """Endpoint to create patient
+    ---
+    tags:
+      - Patient
+    parameters:
+      - name: body
+        in: body
+        required: true
+        description:
+        example: {
+            "first_name": "Ram",
+            "last_name": "Gautam",
+            "age": "23",
+            "gender": "Male",
+            "address": "Ratnanagar 13, Chitwan",
+            "country": "Nepal"
+        }
+    responses:
+        200:
+            description: Patient created successfully
+        500:
+            description: Something went wrong
+    """
+      request_json = request.json
+      return jsonify(request_json), 200

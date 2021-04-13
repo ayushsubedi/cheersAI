@@ -12,14 +12,21 @@ configure_uploads(application, photos)
 @application.route("/dr", methods=['GET', 'POST'])
 @basic_auth.required
 def dr():
-    filename = None
-    if request.method == 'POST' and 'photo' in request.files:
+    filename_left, filename_right = None, None
+    if request.method == 'POST' and ('photo_left' or 'photo_right') in request.files:
         try:
-            filename = photos.save(request.files['photo'])
+            filename_left = photos.save(request.files['photo_left'])
+            filename_right = photos.save(request.files['photo_right'])
             flash("Photo saved successfully.")
         except UploadNotAllowed:
             flash("Failed. Please select jpeg, jpg or png.")
-        return render_template('dr.html', filename=filename, prediction=transform_image('cheersAI/static/uploaded_img/'+filename))
+        content = {
+            "filename_left":filename_left, 
+            "filename_right":filename_right, 
+            "prediction_left":transform_image('cheersAI/static/uploaded_img/'+filename_left),
+            "prediction_right":transform_image('cheersAI/static/uploaded_img/'+filename_left)
+        }
+        return render_template('dr.html', **content)
     return render_template('dr.html')
 
 

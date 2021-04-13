@@ -1,4 +1,5 @@
 from cheersAI import application
+from cheersAI.helper import all_countries
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Length
@@ -12,6 +13,6 @@ class PatientForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired(), Length(min=2, max=50)])
     gender = SelectField('Gender', choices=['Not Specified', 'Male', 'Female'], validators=[DataRequired()])
     age = IntegerField('Age', validators=[DataRequired(), Length(min=2, max=50)])
-    country = SelectField('Country', choices=country_list, validators=[DataRequired()])
+    country = SelectField('Country', choices=all_countries(), validators=[DataRequired()])
     submit  = SubmitField('Add Patient')
 

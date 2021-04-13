@@ -6,7 +6,7 @@ from cheersAI.forms import PatientForm
 @application.route("/all_patients", methods=['GET'])
 def all_patients():
     return render_template('all_patients.html')
-    
+
 
 @application.route("/patient/create", methods=['GET', 'POST'])
 def patient_create():

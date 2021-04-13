@@ -55,6 +55,7 @@ def api_patient_create():
         500:
             description: Something went wrong
     """
+      
       first_name = request.json['first_name']
       last_name = request.json['last_name']
       age = request.json['age']

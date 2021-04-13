@@ -11,7 +11,7 @@
 {% endif %}
 {% endwith %}
 
-<form enctype=multipart/form-data action="" method = "POST">   
+<form action="{{url_for('patient_create')}}" method = "POST">   
     <div class="field is-inline-block-desktop">
         <label class="label">CHEERS ID</label>
         <div class="control">

@@ -1,31 +1,93 @@
 {% extends "base.html" %}
 {% block content %}
 <h1 class="title">Diabetic Retinopathy Prediction</h1>
-<h2 class="subtitle">Future home of Diabetic Retinopathy Prediction</h2>
-
-
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 <ul class=flashes>
-{% for message in messages %}
-    <li>{{ message }}</li>
-{% endfor %}
+   {% for message in messages %}
+   <li>{{ message }}</li>
+   {% endfor %}
 </ul>
 {% endif %}
 {% endwith %}
+<form enctype=multipart/form-data action="{{ url_for('dr') }}" method = "POST">
+   <div class="field-group">
+      <div class="field is-inline-block-desktop">
+         <label class="label">First Name</label>
+         <div class="control">
+            <input class="input" type="text" name="first_name" placeholder="first name">
+         </div>
+      </div>
+      <div class="field is-inline-block-desktop">
+         <label class="label">Last Name</label>
+         <div class="control">
+            <input class="input" type="text" name="last_name" placeholder="last name">
+         </div>
+      </div>
+   </div>
+   <div class="field-group">
+   <div class="field is-inline-block-desktop">
+      <label class="label">Age</label>
+      <div class="control">
+         <input class="input" type="text" name="age" placeholder="age">
+      </div>
+   </div>
+   
+   <div class="field is-inline-block-desktop">
+    <label class="label">Gender</label>
+    <div class="select" name="gender">
+        <select>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Not Specified</option>
+        </select>
+      </div>
+ </div>
+</div>
+<div class="field is-inline-block-desktop">
+    <label class="label">Address</label>
+    <div class="control">
+       <input class="input" type="text" name="address" placeholder="age">
+    </div>
+ </div>
 
-<form method=POST enctype=multipart/form-data action="{{ url_for('dr') }}">
-<input type=file name=photo>
-<button type="submit">Submit</button>
-
+   <div class="field-group">
+      <div class="field is-inline-block-desktop">
+         <label class="label">Left Eye Image</label>
+         <div class="control">
+            <input class="input" type="file" name="photo_left" placeholder="Image URL">
+         </div>
+      </div>
+      <div class="field is-inline-block-desktop">
+         <label class="label">Right Eye Image</label>
+         <div class="control">
+            <input class="input" type="file" name="photo_right" placeholder="Image URL">
+         </div>
+      </div>
+   </div>
+   <div class="control">
+      <button class="button is-link">Submit</button>
+   </div>
 </form>
-
 <br />
 
-{% if filename %}
-    <img src="{{ url_for('static', filename='uploaded_img/') }}{{filename}}" width="512" height="512" />
-    <br />
-    Diabetic Retinopathy Prediction (Level): {{prediction}}
-{% endif %}
+<div class="columns">
+    <div class="column">
+        {% if filename_left %}
+        <h2>Diabetic Retinopathy Prediction Left Eye</h2>
+        <img src="{{ url_for('static', filename='uploaded_img/') }}{{filename_left}}" width="512" height="512" />
+        
+         <h2>{{prediction_left}}</h2>
+        {% endif %}
+    </div>
+    <div class="column">
+        {% if filename_right %}
+        <h2>Diabetic Retinopathy Prediction Right Eye</h2>
+        <img src="{{ url_for('static', filename='uploaded_img/') }}{{filename_right}}" width="512" height="512" />
+
+        <h2> {{prediction_right}} </h2>
+        {% endif %}
+    </div>
+    </div>
 
 {% endblock %}

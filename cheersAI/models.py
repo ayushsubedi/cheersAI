@@ -2,7 +2,7 @@ from cheersAI import application
 from cheersAI import db
 from datetime import datetime
 
-class Patients(db.Model):
+class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     cheers_id = db.Column(db.String(50), nullable=True)
     first_name = db.Column(db.String(50), nullable=False)

@@ -1,8 +1,6 @@
 
 ![Image of Yaktocat](https://github.com/CHEERS-Hospital/cheersAI/blob/main/cheersAI/static/img/logo.png?raw=true)
 
-
-
 # Todos
 
 #### Preliminary
@@ -53,7 +51,7 @@
 - [ ] Identify more UI/API todos
 
 # Mockup
-![](https://github.com/CHEERS-Hospital/cheersAI/blob/main/cheersAI/static/img/mockups.png?raw=true)
+- [ ] redo mockups
 
 # Installation
 

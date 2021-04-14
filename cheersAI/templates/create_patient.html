@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 class="title">Create New Patient</h1>
+<h1 class="title">{{ title }}</h1>
 
 <form method="POST" action="{{url_for(action, patient_id=patient_id)}}">
    {{form.hidden_tag()}}

@@ -32,7 +32,7 @@ def patient_create():
             flash (f"Something went wrong."+str(e), "danger")
         finally:
             return redirect(url_for('all_patients'))
-    return render_template('create_patient.html', action='patient_create', form=form)
+    return render_template('create_patient.html', title="Create New Patient", action='patient_create', form=form)
 
 
 @application.route("/patient/delete/<patient_id>", methods=['GET'])
@@ -62,5 +62,5 @@ def patient_edit(patient_id):
             flash (f"Something went wrong."+str(e), "danger")
         finally:
             return redirect(url_for('all_patients'))
-    return render_template('create_patient.html', action='patient_edit', form=form, patient_id=patient_id)
+    return render_template('create_patient.html', action='patient_edit', title="Update Patient", form=form, patient_id=patient_id)
 

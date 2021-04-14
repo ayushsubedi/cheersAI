@@ -21,7 +21,7 @@
 
 #### Forms
 - [x] create input fields for PATIENT table name, age, gender, address, country, cheersID
-- [ ] segregate PATIENT with other forms
+- [x] segregate PATIENT with other forms
 - [ ] SHOW, CREATE, EDIT, DELETE patients
 
 #### Engineering

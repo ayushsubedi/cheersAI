@@ -16,7 +16,7 @@ class PatientForm(FlaskForm):
     submit  = SubmitField('Save')
 
 class DRForm(FlaskForm):
-    left_eye = FileField()
-    right_eye = FileField()
+    left_eye = FileField('Left Eye')
+    right_eye = FileField('Right Eye')
     submit  = SubmitField('Predict')
 

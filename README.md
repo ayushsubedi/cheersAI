@@ -25,6 +25,7 @@
 - [x] segregate PATIENT with other forms
 - [x] SHOW, CREATE, EDIT, DELETE patients
 - [x] DR UPLOAD
+- [ ] GLAUCOMA UPLOAD
 - [x] Create a page for patient's history
 
 #### Engineering

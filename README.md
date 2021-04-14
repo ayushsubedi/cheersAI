@@ -25,7 +25,7 @@
 - [x] segregate PATIENT with other forms
 - [x] SHOW, CREATE, EDIT, DELETE patients
 - [ ] DR UPLOAD
-- [ ] Create a page for patient's history
+- [x] Create a page for patient's history
 
 #### Engineering
 - [ ] Identify patient tracking

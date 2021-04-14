@@ -17,7 +17,7 @@
 - [x] Create a mechanism for seemless transitioning when models are updated
 - [ ] Identify more engineering problems
 - [ ] Figure out ways to deploy for staging
-- [ ] Create table schema
+- [x] Create table schema
 
 #### Forms
 - [x] create input fields for PATIENT table name, age, gender, address, country, cheersID

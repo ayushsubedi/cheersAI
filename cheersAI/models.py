@@ -15,7 +15,6 @@ class Patient(db.Model):
     date_update = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        # return f"<id={self.id}, cheers_id={self.cheers_id}, first_name={self.first_name}, last_name={self.last_name}, age={self.age}, gender={self.gender}, address={self.address}, country={self.country}, date_create={self.date_create},  date_update={self.date_update}>"
         return f"<id={self.id}>"
 
     def __getitem__(self, key):

@@ -48,25 +48,23 @@
 <h2 class="subtitle">Patient's History</h2>
 
 
-<form enctype=multipart/form-data action="" method = "POST"></form>
-<div class="field-group">
-    <div class="field is-inline-block-desktop">
-       <label class="label">Left Eye Image</label>
-       <div class="control">
-          <input class="input" type="file" name="photo_left" placeholder="Image URL">
-       </div>
-    </div>
-    <div class="field is-inline-block-desktop">
-       <label class="label">Right Eye Image</label>
-       <div class="control">
-          <input class="input" type="file" name="photo_right" placeholder="Image URL">
-       </div>
-    </div>
- </div>
- <div class="control">
-    <button class="button is-link">Submit</button>
- </div>
+<form method="POST" action="">
+    {{drform.hidden_tag()}}
+    <div class="field-group">
+        <div class="field is-inline-block-desktop">
+            {{drform.left_eye.label(class="label")}}
+            {{drform.left_eye(class="input")}}
+        </div>
+        <div class="field is-inline-block-desktop">
+            <div class="field is-inline-block-desktop">
+            {{drform.right_eye.label(class="label")}}
+            {{drform.right_eye(class="input")}}
+            </div>
+        </div>
+     </div>
+     {{form.submit(class='button is-link')}}
 </form>
+
 <br />
 
 

@@ -27,6 +27,7 @@
 - [x] DR UPLOAD
 - [ ] GLAUCOMA UPLOAD
 - [x] Create a page for patient's history
+- [x] Separate left and right images
 
 #### Engineering
 - [ ] Identify patient tracking

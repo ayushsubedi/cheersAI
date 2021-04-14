@@ -5,17 +5,24 @@ from cheersAI.models import Patient
 from cheersAI import db
 import pandas as pd
 from datetime import datetime
+from werkzeug.utils import secure_filename
 
 @application.route("/all_patients", methods=['GET'])
 def all_patients():
     patients = Patient.query.all()
     return render_template('all_patients.html', patients=patients)
 
-@application.route("/patient/<patient_id>", methods=['GET'])
+@application.route("/patient/<patient_id>", methods=['GET', 'POST'])
 def patient(patient_id):
-    dr_form = DRForm()
+    drform = DRForm()
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
-    return render_template('patient.html', patient=patient, drform=dr_form)
+    if drform.validate_on_submit():
+        left_eye_filename = secure_filename(drform.left_eye.data.filename)
+        right_eye_filename = secure_filename(drform.right_eye.data.filename)
+        drform.left_eye.data.save('cheersAI/static/uploaded_img/dr/' + left_eye_filename)
+        drform.right_eye.data.save('cheersAI/static/uploaded_img/dr/' + right_eye_filename)
+        return redirect(url_for('patient', patient_id=patient_id))
+    return render_template('patient.html', patient=patient, drform=drform)
 
 
 @application.route("/patient/create", methods=['GET', 'POST'])

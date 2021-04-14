@@ -2,7 +2,7 @@
 {% block content %}
 <h1 class="title">Create New Patient</h1>
 
-<form method="POST" action="{{url_for('patient_create')}}">
+<form method="POST" action="{{url_for(action, patient_id=patient_id)}}">
    {{form.hidden_tag()}}
 
    <div class="field is-inline-block-desktop">

@@ -15,6 +15,7 @@
 - [x] Create a mechanism to store uploaded files
 - [x] Create a mechanism for seemless transitioning when models are updated
 - [x] Create table schema
+- [ ] incorporate datatable
 - [ ] Identify more engineering problems
 - [ ] Figure out ways to deploy for staging
 - [ ] research storage for images

@@ -1,7 +1,7 @@
 from cheersAI import application
 from cheersAI.helper import all_countries
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, IntegerField
+from wtforms import StringField, SubmitField, SelectField, IntegerField, FileField
 from wtforms.validators import DataRequired, Length, NumberRange
 
 
@@ -14,4 +14,9 @@ class PatientForm(FlaskForm):
     age = IntegerField('Age', validators=[NumberRange(min=0, max=150)])
     country = SelectField('Country', choices=all_countries())
     submit  = SubmitField('Save')
+
+class DRForm(FlaskForm):
+    left_eye = FileField('Left Eye')
+    right_eye = FileField('Right Eye')
+    submit  = SubmitField('Predict')
 

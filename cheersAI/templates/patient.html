@@ -48,7 +48,22 @@
 <h2 class="subtitle">Patient's History</h2>
 
 
+<form method="POST" action="" enctype="multipart/form-data">
+    {{drform.hidden_tag()}}
+    <div class="field-group">
+        <div class="field is-inline-block-desktop">
+            {{drform.left_eye.label(class="label")}}
+            {{drform.left_eye(class="input")}}
+        </div>
+        <div class="field is-inline-block-desktop">
+            {{drform.right_eye.label(class="label")}}
+            {{drform.right_eye(class="input")}}
+        </div>
+     </div>
+     {{drform.submit(class='button is-link')}}
+</form>
 
+<br />
 
 
 <br><br><br><br><br><br>

@@ -1,20 +1,57 @@
 from cheersAI import application
 from flask import render_template, request, jsonify, flash, redirect, url_for
-from cheersAI.forms import PatientForm
-from cheersAI.models import Patient
+from cheersAI.forms import PatientForm, DRForm
+from cheersAI.models import Patient, DR
+from cheersAI.helper import new_filename
 from cheersAI import db
 import pandas as pd
 from datetime import datetime
+from werkzeug.utils import secure_filename
+
+DR_PATH = "cheersAI/static/uploaded_img/dr/"
 
 @application.route("/all_patients", methods=['GET'])
 def all_patients():
     patients = Patient.query.all()
     return render_template('all_patients.html', patients=patients)
 
-@application.route("/patient/<patient_id>", methods=['GET'])
+@application.route("/patient/<patient_id>", methods=['GET', 'POST'])
 def patient(patient_id):
+    drform = DRForm()
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
-    return render_template('patient.html', patient=patient)
+    if drform.validate_on_submit():
+        left_eye_filename = secure_filename(drform.left_eye.data.filename)
+        right_eye_filename = secure_filename(drform.right_eye.data.filename)
+        if (left_eye_filename or right_eye_filename):
+            prediction_left, prediction_right = -1, -1
+            if (left_eye_filename):
+                left_eye_filename = new_filename(patient_id, "left", left_eye_filename)
+                drform.left_eye.data.save(DR_PATH + left_eye_filename)
+                prediction_left = 0
+
+            if (right_eye_filename):
+                right_eye_filename = new_filename(patient_id, "right", right_eye_filename)
+                drform.right_eye.data.save(DR_PATH + right_eye_filename)
+                prediction_right = 0
+
+            new_dr = DR(
+                patient_id = patient_id,
+                prediction_left = prediction_left,
+                image_left = left_eye_filename,
+                prediction_right = prediction_right,
+                image_right = right_eye_filename)
+            try:
+                db.session.add(new_dr)
+                db.session.commit()
+                flash (f"Added to patient history successfully.", "success")
+            except Exception as e:
+                flash (f"Something went wrong."+str(e), "danger")
+            finally:
+                return redirect(url_for('patient', patient_id=patient_id))
+        else:
+            flash (f"Upload left or right eye image to proceed.", "danger")
+            return redirect(url_for('patient', patient_id=patient_id))
+    return render_template('patient.html', patient=patient, drform=drform)
 
 
 @application.route("/patient/create", methods=['GET', 'POST'])

@@ -27,7 +27,7 @@ class Patient(db.Model):
 class DR(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
-    prediction = db.Column(db.String(10))
+    prediction = db.Column(db.String(5))
     image = db.Column(db.String(20), nullable=False)
     date_create = db.Column(db.DateTime, default=datetime.utcnow)
         

@@ -30,7 +30,7 @@
 - [x] Separate left and right images
 
 #### Engineering
-- [ ] Identify patient tracking
+- [x] Identify patient tracking
 - [ ] Create a simple dashboard 
 - [ ] Identify requirements for dashboard
 - [ ] Create a user auth system

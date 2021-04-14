@@ -35,7 +35,7 @@
 - [ ] create list of APIs required
 
 #### SCHEMA
-- [ ] PATIENT
+- [x] PATIENT
 - [ ] USER
 - [ ] PATIENT_DIAGNOSIS_HISTORY
 

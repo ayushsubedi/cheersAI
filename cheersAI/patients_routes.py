@@ -1,7 +1,7 @@
 from cheersAI import application
 from flask import render_template, request, jsonify, flash, redirect, url_for
 from cheersAI.forms import PatientForm, DRForm
-from cheersAI.models import Patient
+from cheersAI.models import Patient, DR
 from cheersAI import db
 import pandas as pd
 from datetime import datetime
@@ -25,10 +25,28 @@ def patient(patient_id):
         if (left_eye_filename):
             left_eye_filename=patient_id+"_left_"+''.join(random.choice(string.ascii_lowercase) for i in range(10))+left_eye_filename.split('.')[1]
             drform.left_eye.data.save('cheersAI/static/uploaded_img/dr/' + left_eye_filename)
+            prediction_left = 0
+
         if (right_eye_filename):
             right_eye_filename=patient_id+"_right_"+''.join(random.choice(string.ascii_lowercase) for i in range(10))+left_eye_filename.split('.')[1]
             drform.right_eye.data.save('cheersAI/static/uploaded_img/dr/' + right_eye_filename)
-        return redirect(url_for('patient', patient_id=patient_id))
+            prediction_right = 0
+
+        new_dr = DR(
+            patient_id = patient_id,
+            prediction_left = prediction_left,
+            image_left = left_eye_filename,
+            prediction_right = prediction_right,
+            image_right = right_eye_filename)
+
+        try:
+            db.session.add(new_dr)
+            db.session.commit()
+            flash (f"Added to patient history successfully.", "success")
+        except Exception as e:
+            flash (f"Something went wrong."+str(e), "danger")
+        finally:
+            return redirect(url_for('patient', patient_id=patient_id))
     return render_template('patient.html', patient=patient, drform=drform)
 
 

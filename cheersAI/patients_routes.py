@@ -33,3 +33,16 @@ def patient_create():
             return redirect(url_for('all_patients'))
     return render_template('create_patient.html', form=form)
 
+
+@application.route("/patient/delete/<patient_id>", methods=['GET'])
+def patient_delete(patient_id):
+    del_patient = Patient.query.filter_by(id=patient_id).first()
+    try:
+        db.session.delete(del_patient)
+        db.session.commit()
+        flash (f"Patient deleted successfully.", "success")
+    except Exception as e:
+        flash (f"Something went wrong."+str(e), "danger")
+    finally:
+        return redirect(url_for('all_patients'))
+

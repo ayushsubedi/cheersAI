@@ -15,7 +15,7 @@ def all_patients():
 def patient(patient_id):
     dr_form = DRForm()
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
-    return render_template('patient.html', patient=patient, drform=DRForm)
+    return render_template('patient.html', patient=patient, drform=dr_form)
 
 
 @application.route("/patient/create", methods=['GET', 'POST'])

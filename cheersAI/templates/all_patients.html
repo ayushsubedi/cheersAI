@@ -6,7 +6,7 @@
 <h1 class="title">Patients</h1>
 <h2 class="subtitle">Patients Record</h2>
 
-<table id="table_id" class="table is-fullwidth">
+<table id="table_patients" class="table is-fullwidth is-striped is-hoverable">
   <thead>
       <tr>
           <th>ID</th>
@@ -16,6 +16,7 @@
           <th>Age</th>
           <th>Address</th>
           <th>Country</th>
+          <th>Created at</th>
       </tr>
   </thead>
   <tbody>
@@ -28,14 +29,19 @@
       <td> {{ patient.age }} </td>
       <td> {{ patient.address }} </td>
       <td> {{ patient.country }} </td>
+      <td> {{ patient.date_create }} </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 
+
+{% endblock %}
+
+{% block javascript %}
 <script>
   $(document).ready( function () {
-    $('#table_id').DataTable();
+    $('#table_patients').DataTable();
 } );
 </script>
 {% endblock %}

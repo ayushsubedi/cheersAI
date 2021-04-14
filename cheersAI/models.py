@@ -3,7 +3,7 @@ from cheersAI import db
 from datetime import datetime
 
 class Patient(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     cheers_id = db.Column(db.String(50), nullable=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
@@ -13,6 +13,7 @@ class Patient(db.Model):
     country = db.Column(db.String(50), nullable=False)
     date_create = db.Column(db.DateTime, default=datetime.utcnow)
     date_update = db.Column(db.DateTime, default=datetime.utcnow)
+   
 
     def __repr__(self):
         return f"<id={self.id}>"
@@ -25,7 +26,7 @@ class Patient(db.Model):
 
 
 class DR(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
     prediction_left = db.Column(db.String(5))
     image_left = db.Column(db.String(20), nullable=False)

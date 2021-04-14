@@ -7,7 +7,7 @@
 - [x] create specification document
 - [x] create architecture requirements (ubuntu, nginx, mysql)
 - [ ] research storage for images
-- [ ] create a mapping plan
+- [x] create a mapping plan
 - [x] create basic mockups
 - [x] Cheers fundus image has text label for left/right eye. Research on how this impacts ML
 - [x] If there is an impact, how to get around
@@ -15,9 +15,10 @@
 - [x] Create authentication for interface and API
 - [x] Create a mechanism to store uploaded files
 - [x] Create a mechanism for seemless transitioning when models are updated
+- [x] Create table schema
 - [ ] Identify more engineering problems
 - [ ] Figure out ways to deploy for staging
-- [x] Create table schema
+
 
 #### Forms
 - [x] create input fields for PATIENT table name, age, gender, address, country, cheersID

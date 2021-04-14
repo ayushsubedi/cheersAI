@@ -13,5 +13,5 @@ class PatientForm(FlaskForm):
     gender = SelectField('Gender', choices=['Not Specified', 'Male', 'Female'], validators=[DataRequired()])
     age = IntegerField('Age', validators=[NumberRange(min=0, max=150)])
     country = SelectField('Country', choices=all_countries())
-    submit  = SubmitField('Add Patient')
+    submit  = SubmitField('Save')
 

@@ -2,13 +2,13 @@ from cheersAI import application
 from flask import render_template, request, jsonify, flash, redirect, url_for
 from cheersAI.forms import PatientForm, DRForm
 from cheersAI.models import Patient, DR
+from cheersAI.helper import new_filename
 from cheersAI import db
 import pandas as pd
 from datetime import datetime
 from werkzeug.utils import secure_filename
-import random
-import string
 
+DR_PATH = "cheersAI/static/uploaded_img/dr/"
 
 @application.route("/all_patients", methods=['GET'])
 def all_patients():
@@ -25,13 +25,13 @@ def patient(patient_id):
         if (left_eye_filename or right_eye_filename):
             prediction_left, prediction_right = -1, -1
             if (left_eye_filename):
-                left_eye_filename=patient_id+"_left_"+''.join(random.choice(string.ascii_lowercase) for i in range(10))+'.'+left_eye_filename.split('.')[1]
-                drform.left_eye.data.save('cheersAI/static/uploaded_img/dr/' + left_eye_filename)
+                left_eye_filename = new_filename(patient_id, "left", left_eye_filename)
+                drform.left_eye.data.save(DR_PATH + left_eye_filename)
                 prediction_left = 0
 
             if (right_eye_filename):
-                right_eye_filename=patient_id+"_right_"+''.join(random.choice(string.ascii_lowercase) for i in range(10))+'.'+right_eye_filename.split('.')[1]
-                drform.right_eye.data.save('cheersAI/static/uploaded_img/dr/' + right_eye_filename)
+                right_eye_filename = new_filename(patient_id, "right", right_eye_filename)
+                drform.right_eye.data.save(DR_PATH + right_eye_filename)
                 prediction_right = 0
 
             new_dr = DR(

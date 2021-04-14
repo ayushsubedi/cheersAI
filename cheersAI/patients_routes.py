@@ -80,8 +80,10 @@ def patient_create():
 @application.route("/patient/delete/<patient_id>", methods=['GET'])
 def patient_delete(patient_id):
     del_patient = Patient.query.filter_by(id=patient_id).first_or_404()
+    delete_images = DR.__table__.delete().where(DR.patient_id == patient_id)
     try:
         db.session.delete(del_patient)
+        db.session.execute(delete_images)
         db.session.commit()
         flash (f"Patient deleted successfully.", "success")
     except Exception as e:

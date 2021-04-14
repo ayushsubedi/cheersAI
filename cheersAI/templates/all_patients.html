@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="buttons is-right">
-    <a href="/patient/create" class="button is-link is-rounded">New Patient</a>
+    <a href="/patient/create" class="button is-success">New Patient</a>
   </div>
 <h1 class="title">Patients</h1>
 <h2 class="subtitle">Patients Record</h2>
@@ -17,6 +17,7 @@
           <th>Address</th>
           <th>Country</th>
           <th>Created at</th>
+          <th>Actions</th>
       </tr>
   </thead>
   <tbody>
@@ -30,6 +31,7 @@
       <td> {{ patient.address }} </td>
       <td> {{ patient.country }} </td>
       <td> {{ patient.date_create }} </td>
+      <td> <i class="fas fa-eye"></i> <i class="fas fa-edit"></i> <i class="far fa-trash-alt"></i></td>
     </tr>
     {% endfor %}
   </tbody>

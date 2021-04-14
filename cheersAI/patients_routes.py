@@ -6,6 +6,9 @@ from cheersAI import db
 import pandas as pd
 from datetime import datetime
 from werkzeug.utils import secure_filename
+import random
+import string
+
 
 @application.route("/all_patients", methods=['GET'])
 def all_patients():
@@ -19,8 +22,12 @@ def patient(patient_id):
     if drform.validate_on_submit():
         left_eye_filename = secure_filename(drform.left_eye.data.filename)
         right_eye_filename = secure_filename(drform.right_eye.data.filename)
-        drform.left_eye.data.save('cheersAI/static/uploaded_img/dr/' + left_eye_filename)
-        drform.right_eye.data.save('cheersAI/static/uploaded_img/dr/' + right_eye_filename)
+        if (left_eye_filename):
+            left_eye_filename=patient_id+"_left_"+''.join(random.choice(string.ascii_lowercase) for i in range(10))+left_eye_filename.split('.')[1]
+            drform.left_eye.data.save('cheersAI/static/uploaded_img/dr/' + left_eye_filename)
+        if (right_eye_filename):
+            right_eye_filename=patient_id+"_right_"+''.join(random.choice(string.ascii_lowercase) for i in range(10))+left_eye_filename.split('.')[1]
+            drform.right_eye.data.save('cheersAI/static/uploaded_img/dr/' + right_eye_filename)
         return redirect(url_for('patient', patient_id=patient_id))
     return render_template('patient.html', patient=patient, drform=drform)
 

@@ -3,11 +3,12 @@ from flask import render_template, request, jsonify, flash, redirect, url_for
 from cheersAI.forms import PatientForm
 from cheersAI.models import Patient
 from cheersAI import db
-
+import pandas as pd
 
 @application.route("/all_patients", methods=['GET'])
 def all_patients():
-    return render_template('all_patients.html')
+    patients = Patient.query.all()
+    return render_template('all_patients.html', patients=patients)
 
 
 @application.route("/patient/create", methods=['GET', 'POST'])

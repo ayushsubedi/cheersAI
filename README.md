@@ -40,7 +40,7 @@
 #### SCHEMA
 - [x] PATIENT
 - [ ] USER
-- [ ] PATIENT_DIAGNOSIS_HISTORY
+- [x] PATIENT_DIAGNOSIS_HISTORY
 
 
 #### User Interface/API

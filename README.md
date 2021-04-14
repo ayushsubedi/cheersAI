@@ -6,7 +6,6 @@
 #### Preliminary
 - [x] create specification document
 - [x] create architecture requirements (ubuntu, nginx, mysql)
-- [ ] research storage for images
 - [x] create a mapping plan
 - [x] create basic mockups
 - [x] Cheers fundus image has text label for left/right eye. Research on how this impacts ML
@@ -18,13 +17,14 @@
 - [x] Create table schema
 - [ ] Identify more engineering problems
 - [ ] Figure out ways to deploy for staging
-
+- [ ] research storage for images
 
 #### Forms
 - [x] create input fields for PATIENT table name, age, gender, address, country, cheersID
 - [x] segregate PATIENT with other forms
 - [x] SHOW, CREATE, EDIT, DELETE patients
 - [ ] DR UPLOAD
+- [ ] Create a page for patient's history
 
 #### Engineering
 - [ ] Identify patient tracking

@@ -19,6 +19,7 @@ def all_patients():
 def patient(patient_id):
     drform = DRForm()
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
+    drhistory = DR.query.filter_by(patient_id=patient_id)
     if drform.validate_on_submit():
         left_eye_filename = secure_filename(drform.left_eye.data.filename)
         right_eye_filename = secure_filename(drform.right_eye.data.filename)
@@ -51,7 +52,7 @@ def patient(patient_id):
         else:
             flash (f"Upload left or right eye image to proceed.", "danger")
             return redirect(url_for('patient', patient_id=patient_id))
-    return render_template('patient.html', patient=patient, drform=drform)
+    return render_template('patient.html', patient=patient, drhistory=drhistory, drform=drform)
 
 
 @application.route("/patient/create", methods=['GET', 'POST'])

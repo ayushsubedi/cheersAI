@@ -10,7 +10,7 @@ import string
 import random
 
 def new_filename(patient_id, eye, safe_name):
-    return patient_id+'_'+eye+'_'+.join(random.choice(string.ascii_lowercase) for i in range(10))+'.'+safe_name.split('.')[1]
+    return patient_id+'_'+eye+'_'+''.join(random.choice(string.ascii_lowercase) for i in range(10))+'.'+safe_name.split('.')[1]
 
 
 def predict_image(image, loaded_model, test_transforms):

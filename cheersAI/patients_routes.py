@@ -11,6 +11,11 @@ def all_patients():
     patients = Patient.query.all()
     return render_template('all_patients.html', patients=patients)
 
+@application.route("/patient/<patient_id>", methods=['GET'])
+def patient(patient_id):
+    patient = Patient.query.filter_by(id=patient_id).first_or_404()
+    return render_template('patient.html', patient=patient)
+
 
 @application.route("/patient/create", methods=['GET', 'POST'])
 def patient_create():

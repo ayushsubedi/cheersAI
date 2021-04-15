@@ -13,31 +13,22 @@
                         <tbody>
                             <tr><td><h6 class="title is-6">Name</h6></td><td> {{patient.first_name}} {{patient.last_name}} </td></tr>
                             <tr><td><h6 class="title is-6">Age</h6></td><td> {{patient.age}}  </td></tr>
+                            <tr><td><h6 class="title is-6">Id</h6></td><td> {{patient.id}}  </td></tr>
+                            <tr><td><h6 class="title is-6">Cheers ID</h6></td><td> {{patient.cheers_id}}  </td></tr>
                             <tr><td><h6 class="title is-6">Gender</h6></td><td> {{patient.gender}} </td></tr>
                             <tr><td><h6 class="title is-6">Address</h6></td><td> {{patient.address}} </td></tr>
                             <tr><td><h6 class="title is-6">Country</h6></td><td> {{patient.country}} </td></tr>
+                            <tr><td><h6 class="title is-6">Phone</h6></td><td> {{patient.phone}} </td></tr>
+                            <tr><td><h6 class="title is-6">Email</h6></td><td> {{patient.email}} </td></tr>
                             <tr><td><h6 class="title is-6">Created at</h6></td><td> {{patient.date_create.strftime('%Y-%m-%d')}} </td></tr>
                             <tr><td><h6 class="title is-6">Updated at</h6></td><td> {{patient.date_update.strftime('%Y-%m-%d')}} </td></tr>
                         </tbody>
                 </table>
                 </div>
                 <div class="column">
-                    <br>
-                    <article class="tile is-child notification is-primary">
-                        <p class="title">ID</p>
-                        <p class="subtitle">{{patient.id}}</p>
-                      </article>
-                      <br>
-                      <article class="tile is-child notification is-primary">
-                        <p class="title">CHEERS ID</p>
-                        <p class="subtitle">
-                            {% if patient.cheers_id %}
-                                {{patient.cheers_id}}
-                            {%else%}
-                                -
-                            {% endif %}
-                        </p>
-                      </article>
+                   
+                    
+                     
                 </div>
             </div>
         </div>

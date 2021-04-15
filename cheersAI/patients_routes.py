@@ -63,6 +63,8 @@ def patient_create():
             first_name=request.form['first_name'], 
             last_name=request.form['last_name'], 
             age=request.form['age'], 
+            email=request.form['email'],
+            phone=request.form['phone'],
             gender=request.form['gender'], 
             address=request.form['address'],
             country=request.form['country'],

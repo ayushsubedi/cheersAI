@@ -34,7 +34,7 @@ def patient(patient_id):
                 right_eye_filename = secure_filename(drform.right_eye.data.filename)
                 right_eye_filename = new_filename(patient_id, "right", right_eye_filename)
                 drform.right_eye.data.save(DR_PATH + right_eye_filename)
-                prediction_left = transform_image(DR_PATH + right_eye_filename)
+                prediction_right = transform_image(DR_PATH + right_eye_filename)
 
             new_dr = DR(
                 patient_id = patient_id,

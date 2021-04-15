@@ -1,7 +1,8 @@
 from cheersAI import application
 from cheersAI.helper import all_countries
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, IntegerField, FileField, EmailField
+from wtforms import StringField, SubmitField, SelectField, IntegerField, FileField
+from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, NumberRange, Email
 
 

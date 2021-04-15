@@ -75,7 +75,7 @@
 <br><br>
 <h2 class="subtitle">Left Eye</h2>
 <div class="columns is-multiline">
-  {% for history in drhistory %}
+  {% for history in drhistory | sort(attribute='date_create', reverse = True) %}
   {% if history.image_left %}
   <div class="column is-one-quarter-desktop is-half-tablet">
     <div class="card">
@@ -108,7 +108,7 @@
 <br><br>
 <h2 class="subtitle">Right Eye</h2>
 <div class="columns is-multiline">
-    {% for history in drhistory %}
+    {% for history in drhistory | sort(attribute='date_create', reverse = True)%}
     {% if history.image_right %}
     <div class="column is-one-quarter-desktop is-half-tablet">
       <div class="card">

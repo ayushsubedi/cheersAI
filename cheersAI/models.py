@@ -12,7 +12,7 @@ class Patient(db.Model):
     address = db.Column(db.String(200), nullable=False)
     country = db.Column(db.String(50), nullable=False)
     phone = db.Column(db.String(20), nullable=False)
-    email = db.Column(db.String(30), nullable=Trueß)
+    email = db.Column(db.String(30), nullable=True)
     date_create = db.Column(db.DateTime, default=datetime.utcnow)
     date_update = db.Column(db.DateTime, default=datetime.utcnow)
    

@@ -20,6 +20,7 @@
 - [ ] Figure out ways to deploy for staging
 - [ ] research storage for images
 - [ ] add email and phone number to patients table
+- [ ] retrofit the priliminary model
 
 
 #### Forms

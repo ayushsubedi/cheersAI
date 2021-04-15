@@ -96,6 +96,19 @@ def patient_delete(patient_id):
         return redirect(url_for('all_patients'))
 
 
+@application.route("/dr/delete/<dr_id>", methods=['GET'])
+def dr_delete(dr_id):
+    del_dr = DR.query.filter_by(id=dr_id).first_or_404()
+    try:
+        db.session.delete(del_dr)
+        db.session.commit()
+        flash (f"DR history deleted successfully.", "success")
+    except Exception as e:
+        flash (f"Something went wrong."+str(e), "danger")
+    finally:
+        return redirect(url_for('patient', patient_id=del_dr.patient_id))
+
+
 @application.route("/patient/edit/<patient_id>", methods=['GET', 'POST'])
 def patient_edit(patient_id):
     edit_patient = Patient.query.filter_by(id=patient_id).first_or_404()

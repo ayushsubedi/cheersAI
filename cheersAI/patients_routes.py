@@ -71,10 +71,10 @@ def patient_create():
             db.session.add(new_patient)
             db.session.commit()
             flash (f"Patient created successfully.", "success")
+            return redirect(url_for('patient', patient_id=new_patient.id))
         except Exception as e:
             flash (f"Something went wrong."+str(e), "danger")
-        finally:
-            return redirect(url_for('all_patients'))
+            return redirect(url_for('all_patients'))    
     return render_template('create_patient.html', title="Create New Patient", action='patient_create', form=form)
 
 

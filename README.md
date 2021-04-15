@@ -19,6 +19,8 @@
 - [ ] Identify more engineering problems
 - [ ] Figure out ways to deploy for staging
 - [ ] research storage for images
+- [ ] add email and phone number to patients table
+
 
 #### Forms
 - [x] create input fields for PATIENT table name, age, gender, address, country, cheersID

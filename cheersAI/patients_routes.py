@@ -2,7 +2,7 @@ from cheersAI import application
 from flask import render_template, request, jsonify, flash, redirect, url_for
 from cheersAI.forms import PatientForm, DRForm
 from cheersAI.models import Patient, DR
-from cheersAI.helper import new_filename
+from cheersAI.helper import new_filename, transform_image
 from cheersAI import db
 import pandas as pd
 from datetime import datetime
@@ -28,13 +28,13 @@ def patient(patient_id):
                 left_eye_filename = secure_filename(drform.left_eye.data.filename)
                 left_eye_filename = new_filename(patient_id, "left", left_eye_filename)
                 drform.left_eye.data.save(DR_PATH + left_eye_filename)
-                prediction_left = 0
+                prediction_left = transform_image(DR_PATH + left_eye_filename)
 
             if (drform.right_eye.data):
                 right_eye_filename = secure_filename(drform.right_eye.data.filename)
                 right_eye_filename = new_filename(patient_id, "right", right_eye_filename)
                 drform.right_eye.data.save(DR_PATH + right_eye_filename)
-                prediction_right = 0
+                prediction_left = transform_image(DR_PATH + right_eye_filename)
 
             new_dr = DR(
                 patient_id = patient_id,

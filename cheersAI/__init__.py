@@ -19,8 +19,8 @@ application.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 application.config['BASIC_AUTH_USERNAME'] = environ.get('BASIC_AUTH_USERNAME')
 application.config['BASIC_AUTH_PASSWORD'] = environ.get('BASIC_AUTH_PASSWORD')
 
-application.config["UPLOADED_PHOTOS_DEST"] = "cheersAI/static/uploaded_img"
-application.config['UPLOADED_PHOTOS_ALLOW'] = set(['png', 'jpg', 'jpeg'])
+application.config["UPLOADED_IMAGES_DEST"] = "cheersAI/static/uploaded_img"
+application.config['UPLOADED_IMAGES_ALLOW'] = set(['png', 'jpg', 'jpeg'])
 application.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 

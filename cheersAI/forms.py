@@ -1,10 +1,15 @@
 from cheersAI import application
 from cheersAI.helper import all_countries
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, IntegerField, FileField
+from wtforms import StringField, SubmitField, SelectField, IntegerField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, NumberRange, Email
 
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from flask_uploads import UploadSet, IMAGES, configure_uploads
+
+images = UploadSet('images', IMAGES)
+configure_uploads(application, images)
 
 class PatientForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired(), Length(min=2, max=50)])
@@ -19,7 +24,7 @@ class PatientForm(FlaskForm):
     submit  = SubmitField('Save')
 
 class DRForm(FlaskForm):
-    left_eye = FileField('Left Eye')
-    right_eye = FileField('Right Eye')
+    left_eye = FileField('Left Eye', validators=[FileAllowed(images, 'Incorrect file type. Upload accepts images only.')])
+    right_eye = FileField('Right Eye', validators=[FileAllowed(images, 'Incorrect file type. Upload accepts images only.')])
     submit  = SubmitField('Predict')
 

@@ -21,16 +21,17 @@ def patient(patient_id):
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
     drhistory = DR.query.filter_by(patient_id=patient_id)
     if drform.validate_on_submit():
-        left_eye_filename = secure_filename(drform.left_eye.data.filename)
-        right_eye_filename = secure_filename(drform.right_eye.data.filename)
-        if (left_eye_filename or right_eye_filename):
+        if (drform.left_eye.data or drform.left_eye.data):
             prediction_left, prediction_right = -1, -1
-            if (left_eye_filename):
+            left_eye_filename, right_eye_filename = "", ""
+            if (drform.left_eye.data):
+                left_eye_filename = secure_filename(drform.left_eye.data.filename)
                 left_eye_filename = new_filename(patient_id, "left", left_eye_filename)
                 drform.left_eye.data.save(DR_PATH + left_eye_filename)
                 prediction_left = 0
 
-            if (right_eye_filename):
+            if (drform.right_eye.data):
+                right_eye_filename = secure_filename(drform.right_eye.data.filename)
                 right_eye_filename = new_filename(patient_id, "right", right_eye_filename)
                 drform.right_eye.data.save(DR_PATH + right_eye_filename)
                 prediction_right = 0

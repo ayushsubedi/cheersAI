@@ -42,13 +42,32 @@
     {{drform.hidden_tag()}}
     <div class="field-group">
         <div class="field is-inline-block-desktop">
-            {{drform.left_eye.label(class="label")}}
+          {{drform.left_eye.label(class="label")}}
+          {% if drform.left_eye.errors %}
+             {{drform.left_eye(class="input is-danger")}}
+             <p class="help is-danger">
+                {% for error in drform.left_eye.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+             </p>
+          {% else %}
             {{drform.left_eye(class="input")}}
+          {% endif %}
         </div>
-        <div class="field is-inline-block-desktop">
+        <div class="field-group">
+          <div class="field is-inline-block-desktop">
             {{drform.right_eye.label(class="label")}}
-            {{drform.right_eye(class="input")}}
-        </div>
+            {% if drform.right_eye.errors %}
+               {{drform.right_eye(class="input is-danger")}}
+               <p class="help is-danger">
+                  {% for error in drform.right_eye.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+               </p>
+            {% else %}
+              {{drform.right_eye(class="input")}}
+            {% endif %}
+          </div>
      </div>
      {{drform.submit(class='button is-link')}}
 </form>

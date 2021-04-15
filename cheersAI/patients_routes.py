@@ -21,7 +21,7 @@ def patient(patient_id):
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
     drhistory = DR.query.filter_by(patient_id=patient_id)
     if drform.validate_on_submit():
-        if (drform.left_eye.data or drform.left_eye.data):
+        if (drform.left_eye.data or drform.right_eye.data):
             prediction_left, prediction_right = -1, -1
             left_eye_filename, right_eye_filename = "", ""
             if (drform.left_eye.data):

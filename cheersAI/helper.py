@@ -8,6 +8,52 @@ import os
 import copy
 import string
 import random
+import cv2
+import numpy as np
+
+input_size = 229
+
+class ben_color(object):
+   
+   #     Parameters
+   #    ----------
+   #   img: 2D numpy array
+   #         The original image with format of (h, w, c)
+    
+    def __call__(self, img, sigmaX=10):
+        """
+        :param img: PIL): Image 
+
+        :return: Normalized image
+        """
+
+        img = np.asarray(img)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img = self.crop_image_from_gray(img)
+        img = cv2.resize(img, (input_size, input_size))
+        img = cv2.addWeighted (img, 4, cv2.GaussianBlur(img, (0,0), sigmaX), -4, 128)
+        return Image.fromarray(img)
+
+    def crop_image_from_gray(self, img, tol=7):
+        if img.ndim ==2:
+            mask = img>tol
+            return img[np.ix_(mask.any(1),mask.any(0))]
+        elif img.ndim==3:
+            gray_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+            mask = gray_img>tol
+            
+            check_shape = img[:,:,0][np.ix_(mask.any(1),mask.any(0))].shape[0]
+            if (check_shape == 0):
+                return img 
+            else:
+                img1=img[:,:,0][np.ix_(mask.any(1),mask.any(0))]
+                img2=img[:,:,1][np.ix_(mask.any(1),mask.any(0))]
+                img3=img[:,:,2][np.ix_(mask.any(1),mask.any(0))]
+                img = np.stack([img1,img2,img3],axis=-1)
+            return img
+
+    def __repr__(self):
+        return self.__class__.__name__+'()'
 
 def new_filename(patient_id, eye, safe_name):
     return patient_id+'_'+eye+'_'+''.join(random.choice(string.ascii_lowercase) for i in range(10))+'.'+safe_name.split('.')[1]
@@ -24,13 +70,16 @@ def predict_image(image, loaded_model, test_transforms):
     return index
 
 def transform_image(image_url):
+
     test_transforms = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
-    transforms.ToTensor(),
-    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
-    url = "https://zenodo.org/record/4608087/files/model_conv.h5"
-    loaded_model = torch.utils.model_zoo.load_url(url, map_location=torch.device('cpu'))
+        ben_color(),
+        transforms.Resize((input_size, input_size)),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        ])
+    # url = "https://zenodo.org/record/4608087/files/model_conv.h5"
+    # loaded_model = torch.utils.model_zoo.load_url(url, map_location=torch.device('cpu'))
+    loaded_model = torch.load('cheersAI/static/saved_models/inception_weights.h5', map_location=torch.device('cpu'))
     loaded_model.eval()
     image = Image.open(image_url)
     return str(predict_image(image, loaded_model, test_transforms))

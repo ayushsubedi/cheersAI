@@ -20,40 +20,40 @@
     
   </head>
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" width="112" height="28">
-          </a>
-      
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-      
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-            <a class="navbar-item" href="/">
-              Home
-            </a>
-            <a class="navbar-item" href="/dashboard">
-              Dashboard
-            </a>
-      
-            <a class="navbar-item" href="/all_patients">
-              Patients
-            </a>
-
-            <a class="navbar-item" href="/all_users">
-              Users
-            </a>
-
+    <nav class="navbar is-fresh is-transparent no-shadow" role="navigation"
+            aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="https://cssninja.io">
+                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="112" height="28">
+                    </a>
+                </div>
+        
+                    <div class="navbar-end">
+                      <a class="navbar-item" href="/">
+                        Home
+                      </a>
+                      <a class="navbar-item" href="/dashboard">
+                        Dashboard
+                      </a>
+                
+                      <a class="navbar-item" href="/all_patients">
+                        Patients
+                      </a>
+          
+                      <a class="navbar-item" href="/all_users">
+                        Users
+                      </a>
+                        <a class="navbar-item">
+                            <span class="button signup-button rounded secondary-btn raised">
+                                Log in
+                            </span>
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </nav>
+        </nav>
+  
   <section class="section">
     <div class="container">
       {% with messages=get_flashed_messages(with_categories=true) %}

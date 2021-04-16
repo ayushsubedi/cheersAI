@@ -59,9 +59,6 @@
 - [x] Use bulma or tailwind for CSS
 - [ ] Identify more UI/API todos
 
-# Mockup
-- [ ] redo mockups
-
 # Installation
 
 #### Clone the repository

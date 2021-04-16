@@ -28,6 +28,7 @@
 - [x] segregate PATIENT with other forms
 - [x] SHOW, CREATE, EDIT, DELETE patients
 - [x] DR UPLOAD
+- [x] DR DELETE
 - [ ] GLAUCOMA UPLOAD
 - [x] Create a page for patient's history
 - [x] Separate left and right images

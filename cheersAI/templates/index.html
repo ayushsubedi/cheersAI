@@ -1,4 +1,184 @@
 {% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
 {% block content %}
+<div class="hero-body">
+    <div class="container">
+        <div class="columns is-vcentered">
+            <div class="column is-5 is-offset-1 landing-caption">
+                <h1 class="title is-1 is-bold is-spaced">
+                    CheersAI
+                </h1>
+                <h2 class="subtitle is-5 is-muted">An AI enabled tool for prediction of <strong>Diabetic Retinopathy</strong> and <strong>Glaucoma</strong> based on fundus images.</h2>
+                <div class="button-wrap">
+                    <a class="button cta is-rounded primary-btn raised">
+                        Link to paper
+                    </a>
+                    <a class="button cta is-rounded">
+                        Request Access
+                    </a>
+                </div>
+            </div>
+            <div class="column is-5">
+                <figure class="image is-4by4">
+                    <img src="https://images.squarespace-cdn.com/content/v1/5745bdcf1d07c0bbae8d3db5/1465500016343-2AEZURAXF4QT506POQZI/ke17ZwdGBToddI8pDm48kFPg8-q-MIuSEjAmUby6UOt7gQa3H78H3Y0txjaiv_0fvRQuiSgldL0Gq3KRjLoUgFuj6DD1CwvCNZ7MeN8JDjxkaOgErLdrOqS7zQLvz2XSYWIGCz09hdsMV58aIcVcPM7SVA4Xd2RjMr_8PtWHu_KSqv6ABozBf6yIoeF8u1Sr/image-asset.png" alt="Description">
+                </figure>
+            </div>
 
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="section section-feature-grey is-medium">
+<div class="container">
+    <div class="title-wrapper has-text-centered">
+        <h2 class="title is-2">Features</h2>
+        <h3 class="subtitle is-5 is-muted"></h3>
+        <div class="divider is-centered"></div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="columns">
+            <div class="column is-one-third">
+                <div class="feature-card is-bordered has-text-centered is-feature-reveal">
+                    <div class="card-title">
+                        <h4>Efficient Prediction Models</h4>
+                    </div>
+                    <div class="card-icon">
+                        <img src="{{url_for('static', filename='img/light-bulb.svg')}}">
+                    </div>
+                    <div class="card-text">
+                        <p>Efficient models trained on Inception-v3, with weightage on recall.</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="column">
+                <div class="feature-card is-bordered has-text-centered is-feature-reveal">
+                    <div class="card-title">
+                        <h4>Patient Tracking</h4>
+                    </div>
+                    <div class="card-icon">
+                        <img src="{{url_for('static', filename='img/web.svg')}}">
+                    </div>
+                    <div class="card-text">
+                        <p>Powerful MIS to create and track patient, and patient's historical predictions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="feature-card is-bordered has-text-centered is-feature-reveal">
+                    <div class="card-title">
+                        <h4>Continuous Learning</h4>
+                    </div>
+                    <div class="card-icon">
+                        <img src="{{url_for('static', filename='img/rocket.svg')}}">
+                    </div>
+                    <div class="card-text">
+                        <p>Inputs reviewed by opthalmologists and added to training.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="section is-medium">
+<div class="container">
+    <div class="title-wrapper has-text-centered">
+        <h2 class="title is-2">Why?</h2>
+        <h3 class="subtitle is-5 is-muted">The rationale for developing countries.</h3>
+        <div class="divider is-centered"></div>
+    </div>
+
+    <div class="columns is-vcentered side-feature mt-60">
+        <div class="column is-4 is-offset-2">
+            <h3 class="title is-3 mb-10 is-title-reveal">Diabetic Retinopathy</h3>
+            <p class="subtitle is-5 is-muted">
+                Glaucoma is a common eye condition where the optic nerve, which connects the eye to the brain, becomes damaged. It's usually caused by fluid building up in the front part of the eye, which increases pressure inside the eye. Glaucoma can lead to loss of vision if it's not diagnosed and treated early.</p>
+        </div>
+        <div class="column is-5">
+            <img src="https://camo.githubusercontent.com/a6b040d6eca19246121fb7a4e3fca782ed625c42af1889778c4edf14151198ef/68747470733a2f2f6761647364656e6579652e636f6d2f77702d636f6e74656e742f75706c6f6164732f64696162657469632d726574696e6f70617468792d766563746f722e6a7067" alt="">
+        </div>
+    </div>
+
+    <div class="columns is-vcentered side-feature mt-60">
+        <div class="column is-5 is-offset-1">
+            <img src="https://camo.githubusercontent.com/71e24e233d0fc826e10230944b2a1cdfba81b4387862f899f1f7c400330b02c6/68747470733a2f2f7777772e696e6d6564706861726d612e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032302f30352f476c6175636f6d612d636f6d70617265642d746f2d6e6f726d616c2d766973696f6e2e706e67" alt="">
+        </div>
+        <div class="column is-4 is-offset-1">
+            <h3 class="title is-3 mb-10 is-title-reveal">Glaucoma</h3>
+            <p class="subtitle is-5 is-muted">
+                Diabetic retinopathy is a complication of diabetes, caused by high blood sugar levels damaging the back of the eye (retina). It can cause blindness if left undiagnosed and untreated. However, it usually takes several years for diabetic retinopathy to reach a stage where it could threaten your sight.
+            </p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="section section-feature-grey is-medium">
+<div class="container">
+
+    <div class="columns is-vcentered app-side">
+        <div class="column is-5 is-offset-1">
+            <h3 class="title is-3 is-spaced is-title-reveal">An intuitive app</h3>
+            <p class="subtitle is-5 is-muted">
+                Easy to use. Easy to use.Easy to use.Easy to use.Easy to use.Easy to use.Easy to use.Easy to use.Easy to use.Easy to use.Easy to use.Easy to use.Easy to use.Easy to use.
+            </p>
+        </div>
+        <div class="column is-10">
+            <div class="has-text-centered">
+                <img class="pushed-image" src="{{url_for('static', filename='img/demo.png')}}">
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+
+
+<section class="section section-light-grey is-medium">
+<div class="container">
+    <div class="title-wrapper has-text-centered">
+        <h2 class="title is-2 is-spaced">Request Access</h2>
+        <h3 class="subtitle is-5 is-muted">We will get in touch soon.</h3>
+        <div class="divider is-centered"></div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="columns">
+            <div class="column is-6 is-offset-3">
+                <form>
+                    <div class="columns is-multiline">
+                        <div class="column is-6">
+                            <input class="input is-medium" type="text" placeholder="First Name *">
+                        </div>
+                        <div class="column is-6">
+                            <input class="input is-medium" type="text" placeholder="Last Name *">
+                        </div>
+                        <div class="column is-6">
+                            <input class="input is-medium" type="text" placeholder="Email *">
+                        </div>
+                        <div class="column is-6">
+                            <input class="input is-medium" type="email" placeholder="Company">
+                        </div>
+                        <div class="column is-12">
+                            <textarea class="textarea" rows="6" placeholder=""></textarea>
+                        </div>
+                        <div class="column is-12">
+                            <div class="form-footer has-text-right mt-10">
+                                <button class="button cta is-large primary-btn form-button raised is-clear">Send Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
 {% endblock %}

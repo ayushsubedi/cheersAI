@@ -31,8 +31,10 @@ class DR(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
     prediction_left = db.Column(db.String(100))
+    prediction_left_all = db.Column(db.String(100))
     image_left = db.Column(db.String(20), nullable=True)
     prediction_right = db.Column(db.String(100))
+    prediction_right_all = db.Column(db.String(100))
     image_right = db.Column(db.String(20), nullable=True)
     date_create = db.Column(db.DateTime, default=datetime.utcnow)
         

@@ -24,24 +24,27 @@ def patient(patient_id):
     if drform.validate_on_submit():
         if (drform.left_eye.data or drform.right_eye.data):
             prediction_left, prediction_right = -1, -1
+            prediction_left_all, prediction_right_all = "", ""
             left_eye_filename, right_eye_filename = "", ""
             if (drform.left_eye.data):
                 left_eye_filename = secure_filename(drform.left_eye.data.filename)
                 left_eye_filename = new_filename(patient_id, "left", left_eye_filename)
                 drform.left_eye.data.save(DR_PATH + left_eye_filename)
-                prediction_left = transform_image(DR_PATH + left_eye_filename)
+                prediction_left_all, prediction_left = transform_image(DR_PATH + left_eye_filename)
 
             if (drform.right_eye.data):
                 right_eye_filename = secure_filename(drform.right_eye.data.filename)
                 right_eye_filename = new_filename(patient_id, "right", right_eye_filename)
                 drform.right_eye.data.save(DR_PATH + right_eye_filename)
-                prediction_right = transform_image(DR_PATH + right_eye_filename)
+                prediction_right_all, prediction_right = transform_image(DR_PATH + right_eye_filename)
 
             new_dr = DR(
                 patient_id = patient_id,
                 prediction_left = prediction_left,
+                prediction_left_all = prediction_left_all,
                 image_left = left_eye_filename,
                 prediction_right = prediction_right,
+                prediction_right_all = prediction_right_all,
                 image_right = right_eye_filename)
             try:
                 db.session.add(new_dr)

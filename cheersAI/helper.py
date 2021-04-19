@@ -68,8 +68,8 @@ def predict_image(image, loaded_model, test_transforms):
     _input = _input.to(device)
     output = loaded_model(_input)
     x = output.data.cpu().numpy()[0]
-    x = [str(int(i)) for i in x]
-    return " ".join(x)
+    x = [float(i) for i in x]
+    return " ".join(map(str, x)), x.index(max(x))
 
 def transform_image(image_url):
 
@@ -84,7 +84,7 @@ def transform_image(image_url):
     loaded_model = torch.load('cheersAI/static/saved_models/inception_weights.h5', map_location=torch.device('cpu'))
     loaded_model.eval()
     image = Image.open(image_url)
-    return str(predict_image(image, loaded_model, test_transforms))
+    return predict_image(image, loaded_model, test_transforms)
 
 def all_countries():
     return ['Nepal',

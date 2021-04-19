@@ -85,7 +85,7 @@
             </figure>
             <div>
             <ul class="chart">
-              {% set list_pred = history.prediction_left.split(' ') %}  
+              {% set list_pred = history.prediction_left_all.split(' ') %}  
               {% for height in list_pred %}
               <li>
                 <span style="height:{{ height }}%" title="{{loop.index - 1}}"></span>
@@ -102,8 +102,9 @@
         <div class="card-content">
           <br>
           <div class="content">
+            <small class="has-text-grey">[{{history.prediction_left_all}}]</small>
             <h3 class="title is-3 has-text-centered">{{ history.prediction_left }}</h3>
-            <h5 class="subtitle has-text-centered">Prediction</h5>
+            <h5 class="subtitle has-text-centered">DR Grade</h5>
           </div>
         </div>
         <footer class="card-footer">
@@ -129,7 +130,7 @@
             </figure>
             <div>
             <ul class="chart">
-              {% set list_pred = history.prediction_right.split(' ') %}  
+              {% set list_pred = history.prediction_right_all.split(' ') %}  
               {% for height in list_pred %}
               <li>
                 <span style="height:{{ height }}%" title="{{loop.index - 1}}"></span>
@@ -146,8 +147,9 @@
         <div class="card-content">
           <br>
           <div class="content">
+            <small class="has-text-grey">[{{history.prediction_right_all}}]</small>
             <h3 class="title is-3 has-text-centered">{{ history.prediction_right }}</h3>
-            <h5 class="subtitle has-text-centered">Prediction</h5>
+            <h5 class="subtitle has-text-centered">DR Grade</h5>
           </div>
         </div>
         <footer class="card-footer">

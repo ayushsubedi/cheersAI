@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/table.css') }}">
     <link rel="shortcut icon" type="image/jpg" href="{{ url_for('static', filename='img/favicon.ico') }}"/>
     {% block css %}{% endblock %}
 
@@ -20,7 +21,7 @@
     
   </head>
   <body>
-    <nav class="navbar is-primary is-fixed-top" role="navigation"
+    <nav class="navbar is-primary is-spaced is-fixed-top" role="navigation"
             aria-label="main navigation">
             <div class="container">
                 <div class="navbar-brand">
@@ -66,7 +67,7 @@
           {% endfor %}
         {% endif %}
         {% endwith %}
-        
+        <br>
       {% block content %}{% endblock %}
         
     </div>

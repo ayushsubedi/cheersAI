@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<section class="section">
 <h1 class="title">{{ title }}</h1>
 
 <form method="POST" action="{{url_for(action, patient_id=patient_id)}}">
@@ -136,5 +137,5 @@
    </div>
    {{form.submit(class='button is-link')}}
 </form>
-
+</section>
 {% endblock %}

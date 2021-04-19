@@ -64,6 +64,7 @@
   
   <section class="section">
     <div class="container">
+      <br><br>
       {% with messages=get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}
@@ -74,7 +75,7 @@
           {% endfor %}
         {% endif %}
         {% endwith %}
-        <br>
+        
       {% block content %}{% endblock %}
         
     </div>

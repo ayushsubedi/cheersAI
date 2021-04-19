@@ -7,6 +7,7 @@ from cheersAI import db
 import pandas as pd
 from datetime import datetime
 from werkzeug.utils import secure_filename
+import ast
 
 DR_PATH = "cheersAI/static/uploaded_img/dr/"
 
@@ -19,7 +20,7 @@ def all_patients():
 def patient(patient_id):
     drform = DRForm()
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
-    drhistory = DR.query.filter_by(patient_id=patient_id)
+    drhistory = DR.query.filter_by(patient_id=patient_id).all()
     if drform.validate_on_submit():
         if (drform.left_eye.data or drform.right_eye.data):
             prediction_left, prediction_right = -1, -1

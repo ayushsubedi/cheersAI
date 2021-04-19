@@ -11,6 +11,7 @@ import random
 import cv2
 import numpy as np
 
+
 input_size = 229
 
 class ben_color(object):
@@ -66,8 +67,9 @@ def predict_image(image, loaded_model, test_transforms):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     _input = _input.to(device)
     output = loaded_model(_input)
-    index = output.data.cpu().numpy().argmax()
-    return index
+    x = output.data.cpu().numpy()[0]
+    x = [str(int(i)) for i in x]
+    return " ".join(x)
 
 def transform_image(image_url):
 

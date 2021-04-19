@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="section">
-<div class="buttons is-right">
-    <a href="/patient/create" class="button is-link is-rounded">New Patient</a>
+  <div class="columns">
+    <div class="column">
+      <h1 class="title">Patients</h1>
+      <h2 class="subtitle">Patients Record</h2>
+      </div>
+    <div class="column">
+      <div class="buttons is-right">
+        <a href="/patient/create" class="button is-link">New Patient</a>
+      </div>
+    </div>
   </div>
-<h1 class="title">Patients</h1>
-<h2 class="subtitle">Patients Record</h2>
+
 
 <table id="table_patients" class="table is-fullwidth is-striped is-hoverable">
   <thead>

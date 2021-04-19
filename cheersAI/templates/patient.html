@@ -38,6 +38,7 @@
 <h1 class="title">Diabetic Retinopathy</h1>
 <h2 class="subtitle">Patient's History</h2>
 
+
 <form method="POST" action="" enctype="multipart/form-data">
     {{drform.hidden_tag()}}
     <div class="field-group">
@@ -54,7 +55,7 @@
             {{drform.left_eye(class="input")}}
           {% endif %}
         </div>
-        <div class="field-group">
+       
           <div class="field is-inline-block-desktop">
             {{drform.right_eye.label(class="label")}}
             {% if drform.right_eye.errors %}
@@ -69,11 +70,14 @@
             {% endif %}
           </div>
      </div>
+
      {{drform.submit(class='button is-link')}}
 </form>
 
 <br><br>
-<h2 class="subtitle">Left Eye</h2>
+<div>
+  <div class="divider">Left Eye</div>
+</div>
 <div class="columns is-multiline">
   {% for history in drhistory | sort(attribute='date_create', reverse = True) %}
   {% if history.image_left %}
@@ -113,7 +117,7 @@
              </div>
             </section>
             <div class="card-content is-overlay is-clipped">
-              <span class="tag is-info">
+              <span class="tag is-link">
                 {{history.date_create.strftime('%Y-%m-%d')}}
               </span>       
             </div>
@@ -136,7 +140,9 @@
 <br />
 
 <br><br>
-<h2 class="subtitle">Right Eye</h2>
+<div>
+  <div class="divider">Right Eye</div>
+</div>
 <div class="columns is-multiline">
   {% for history in drhistory | sort(attribute='date_create', reverse = True) %}
   {% if history.image_right %}

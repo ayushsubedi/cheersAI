@@ -83,16 +83,35 @@
             <figure class="image is-3by2">
               <img src="{{ url_for('static', filename='uploaded_img/dr/')}}{{ history.image_left }}" alt="">
             </figure>
-            <div>
-            <ul class="chart">
-              {% set list_pred = history.prediction_left_all.split(' ') %}  
-              {% for height in list_pred %}
-              <li>
-                <span style="height:{{ height }}%" title="{{loop.index - 1}}"></span>
-              </li>
-              {% endfor %}
-            </ul>    
-          </div>
+            <section>
+              <div id="bar-chart">
+                <div class="graph">
+                   <ul class="x-axis">
+                      <li><span>0</span></li>
+                      <li><span>1</span></li>
+                      <li><span>2</span></li>
+                      <li><span>3</span></li>
+                      <li><span>4</span></li>
+                   </ul>
+                   <ul class="y-axis">
+                      <li><span>100%</span></li>
+                      <li><span>75%</span></li>
+                      <li><span>50%</span></li>
+                      <li><span>25%</span></li>
+                      <li><span>0%</span></li>
+                   </ul>
+                   <div class="bars">
+                    {% set list_pred = history.prediction_left_all.split(' ') %}  
+                    {% for height in list_pred %}
+                      <div class="bar-group">
+                         <div class="bar bar-14 stat-2" style="height:{{ height }}%">
+                         </div>
+                      </div>
+                      {% endfor %}
+                   </div>
+                </div>
+             </div>
+            </section>
             <div class="card-content is-overlay is-clipped">
               <span class="tag is-info">
                 {{history.date_create.strftime('%Y-%m-%d')}}
@@ -100,7 +119,6 @@
             </div>
         </div>
         <div class="card-content">
-          <br>
           <div class="content">
             <small class="has-text-grey">[{{history.prediction_left_all}}]</small>
             <h3 class="title is-3 has-text-centered">{{ history.prediction_left }}</h3>

@@ -32,20 +32,25 @@
       <tr>
           <th>ID</th>
           <th>Email</th>
+          <th>Is Admin</th>
           <th>Created at</th>
-          <th>Updated at</th>
           <th>Actions</th>
       </tr>
   </thead>
   <tbody>
-    {% for user in userss %}
+    {% for user in users %}
     <tr>
       <td data-label="ID"> {{ user.id }} </td>
       <td data-label="Email"> {{ user.email }} </td>
+      <td data-label="Is Admin"> 
+        {% if user.is_admin %} 
+        <i class="far fa-check-circle"></i></i> 
+        {% else %}
+        <i class="far fa-times-circle"></i>
+        {% endif %} 
+      </td>
       <td data-label="Created at"> <small class="has-text-grey">{{ user.date_create.strftime('%Y-%m-%d') }}</small> </td>
-      <td data-label="Updated at"> <small class="has-text-grey">{{ user.date_update.strftime('%Y-%m-%d') }}</small> </td>
-      <td class="is-actions-cell" data-label="Actions"> 
-        <a href={{ url_for("user", user_id=user.id) }}><i class="fas fa-eye"></i> </a> 
+     <td class="is-actions-cell" data-label="Actions"> 
         <a href={{ url_for("user_delete", user_id=user.id) }}><i class="far fa-trash-alt"></i></a>
       </td>
         

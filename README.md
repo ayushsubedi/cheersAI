@@ -51,7 +51,8 @@
 #### SCHEMA
 - [x] PATIENT
 - [x] USER
-- [x] PATIENT_DIAGNOSIS_HISTORY
+- [x] DR
+- [ ] GLAUCOMA
 
 
 #### User Interface/API

@@ -46,4 +46,21 @@ class DR(db.Model):
 
     def __setitem__(self, key, value):
         return setattr(self, key, value)
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(30), nullable=False)
+    password = db.Column(db.String(30, nullable=False)
+    isadmin =  db.Column(db.Boolean, default=False)
+    date_create = db.Column(db.DateTime, default=datetime.utcnow)
+        
+    def __repr__(self):
+        return f"<id={self.id}>"
+
+    def __getitem__(self, key):
+        return getattr(self, key)
+
+    def __setitem__(self, key, value):
+        return setattr(self, key, value)
     

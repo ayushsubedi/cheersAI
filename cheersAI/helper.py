@@ -15,18 +15,8 @@ import numpy as np
 input_size = 229
 
 class ben_color(object):
-   
-   #     Parameters
-   #    ----------
-   #   img: 2D numpy array
-   #         The original image with format of (h, w, c)
-    
-    def __call__(self, img, sigmaX=10):
-        """
-        :param img: PIL): Image 
 
-        :return: Normalized image
-        """
+    def __call__(self, img, sigmaX=10):
 
         img = np.asarray(img)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)

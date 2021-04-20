@@ -16,12 +16,13 @@
 - [x] Create a mechanism for seemless transitioning when models are updated
 - [x] Create table schema
 - [x] incorporate datatable
+- [x] add email and phone number to patients table
+- [x] retrofit the priliminary model
 - [x] create a basic home page for portfolio purposes
 - [ ] Identify more engineering problems
 - [ ] Figure out ways to deploy for staging
 - [ ] research storage for images
-- [x] add email and phone number to patients table
-- [x] retrofit the priliminary model
+
 
 
 #### Forms

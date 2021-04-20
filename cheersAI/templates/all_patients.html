@@ -13,11 +13,13 @@
             <a href="/patient/create" class="button is-link">New Patient</a>
           </div>
         </p>
+        {% if session.user.is_admin %}
         <p class="control">
           <button class="button">
             Download
           </button>
         </p>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -58,8 +60,10 @@
       <td data-label="Updated at"> <small class="has-text-grey">{{ patient.date_update.strftime('%Y-%m-%d') }}</small> </td>
       <td class="is-actions-cell" data-label="Actions"> 
         <a href={{ url_for("patient", patient_id=patient.id) }}><i class="fas fa-eye"></i> </a> 
+        {% if session.user.is_admin %}
         <a href={{ url_for("patient_edit", patient_id=patient.id) }}><i class="fas fa-edit"></i></a> 
         <a href={{ url_for("patient_delete", patient_id=patient.id) }}><i class="far fa-trash-alt"></i></a>
+        {% endif %}
       </td>
         
     </tr>

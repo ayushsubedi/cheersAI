@@ -10,9 +10,18 @@ import string
 import random
 import cv2
 import numpy as np
-
+from functools import wraps
+from flask import session
 
 input_size = 229
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('user') is None:
+            return redirect(url_for('login', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
 
 class ben_color(object):
 

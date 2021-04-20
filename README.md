@@ -44,9 +44,9 @@
 - [ ] Identify other engineering todos
 
 #### Authentication
-- [ ] use basic auth to create users
-- [ ] use sessions and email/passwords for users 
-- [ ] create a flag for admins
+- [x] use basic auth to create users
+- [x] use sessions and email/passwords for users 
+- [x] create a flag for admins
 
 #### SCHEMA
 - [x] PATIENT

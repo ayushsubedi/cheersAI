@@ -3,8 +3,11 @@ from flask import render_template, request, jsonify, flash, redirect, url_for
 from cheersAI.forms import LoginForm, RegisterForm
 from cheersAI.models import User
 from cheersAI import db
+from cheersAI import basic_auth
+
 
 @application.route("/all_users", methods=['GET'])
+@basic_auth.required
 def all_users():
     users = User.query.all()
     return render_template('all_users.html', users=users)
@@ -22,6 +25,7 @@ def login():
 
 
 @application.route("/register", methods=['GET', 'POST'])
+@basic_auth.required
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
@@ -42,6 +46,7 @@ def register():
 
 
 @application.route("/user/delete/<user_id>", methods=['GET'])
+@basic_auth.required
 def user_delete(user_id):
     del_user = User.query.filter_by(id=user_id).first_or_404()
     try:

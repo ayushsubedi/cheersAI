@@ -1,7 +1,7 @@
 from cheersAI import application
 from cheersAI.helper import all_countries
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, IntegerField, PasswordField
+from wtforms import StringField, SubmitField, SelectField, IntegerField, PasswordField, BooleanField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, NumberRange, Email, Optional
 
@@ -32,4 +32,14 @@ class LoginForm(FlaskForm):
     email = EmailField('Email', validators=[Email()])
     password = PasswordField(validators=[DataRequired()])
     submit  = SubmitField('Login')
+
+class RegisterForm(FlaskForm):
+    email = EmailField('Email', validators=[Email()])
+    password = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+    confirm = PasswordField('Repeat Password')
+    is_admin = BooleanField()
+    submit  = SubmitField('Register')
 

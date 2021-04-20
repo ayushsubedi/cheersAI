@@ -39,7 +39,7 @@
 - [ ] Create a simple dashboard 
 - [ ] Identify requirements for dashboard
 - [x] Create a user auth system
-- [ ] Temporarily deploy on mysql (test) to check if schema match
+- [x] Temporarily deploy on mysql (test) to check if schema match
 - [ ] Identify other engineering todos
 
 #### APIs

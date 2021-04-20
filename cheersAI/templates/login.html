@@ -9,7 +9,7 @@
     <link rel="shortcut icon" type="image/jpg" href="{{ url_for('static', filename='img/favicon.ico') }}"/>
     </head>
   <body>
-<section class="hero is-primary is-fullheight">
+<section class="hero is-link is-fullheight">
     <div class="hero-body">
       <div class="container">
         <div class="columns is-centered">
@@ -39,9 +39,12 @@
                  Remember me
                 </label>
               </div>
-              <div class="field">
+              <div class="fieldgroup">
                 <button class="button is-success">
                   Login
+                </button>
+                <button class="button">
+                    Cancel
                 </button>
               </div>
             </form>

@@ -3,7 +3,7 @@ from cheersAI.helper import all_countries
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField
 from wtforms.fields.html5 import EmailField
-from wtforms.validators import DataRequired, Length, NumberRange, Email
+from wtforms.validators import DataRequired, Length, NumberRange, Email, Optional
 
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_uploads import UploadSet, IMAGES, configure_uploads
@@ -18,7 +18,7 @@ class PatientForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired(), Length(min=2, max=50)])
     gender = SelectField('Gender', choices=['Not Specified', 'Male', 'Female'], validators=[DataRequired()])
     age = IntegerField('Age', validators=[NumberRange(min=0, max=150)])
-    email = EmailField('Email', validators=[Email()])
+    email = EmailField('Email', validators=[Optional(), Email()])
     phone = StringField('Phone Number')
     country = SelectField('Country', choices=all_countries())
     submit  = SubmitField('Save')

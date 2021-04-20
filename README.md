@@ -38,7 +38,7 @@
 - [x] Identify patient tracking
 - [ ] Create a simple dashboard 
 - [ ] Identify requirements for dashboard
-- [ ] Create a user auth system
+- [x] Create a user auth system
 - [ ] Identify other engineering todos
 
 #### APIs

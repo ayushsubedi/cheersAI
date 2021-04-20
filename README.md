@@ -29,11 +29,11 @@
 - [x] segregate PATIENT with other forms
 - [x] create, read, update, delete PATIENT
 - [x] create, read, delete USER
-- [ ] create, read, delete DR
+- [x] create, read, delete DR
 - [x] Create a page for patient's history
 - [x] Separate left and right images
-- [ ] login 
-- [ ] register
+- [ ] Login 
+- [ ] Register
 
 #### Engineering
 - [x] Identify patient tracking

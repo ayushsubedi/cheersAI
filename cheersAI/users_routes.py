@@ -18,3 +18,13 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html', form=form)
 
+@application.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        email = request.form['email']
+        password = request.form['password']
+        flash (f"Registration Successful.", "success")
+        return redirect(url_for('index'))
+    return render_template('login.html', form=form)
+

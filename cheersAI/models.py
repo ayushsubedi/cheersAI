@@ -51,8 +51,8 @@ class DR(db.Model):
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(30), nullable=False)
-    password = db.Column(db.String(30, nullable=False)
-    isadmin =  db.Column(db.Boolean, default=False)
+    password = db.Column(db.String(30), nullable=False)
+    is_admin =  db.Column(db.Boolean, default=False)
     date_create = db.Column(db.DateTime, default=datetime.utcnow)
         
     def __repr__(self):

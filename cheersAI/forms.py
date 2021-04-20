@@ -3,7 +3,7 @@ from cheersAI.helper import all_countries
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField, PasswordField, BooleanField
 from wtforms.fields.html5 import EmailField
-from wtforms.validators import DataRequired, Length, NumberRange, Email, Optional
+from wtforms.validators import DataRequired, Length, NumberRange, Email, Optional, EqualTo
 
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_uploads import UploadSet, IMAGES, configure_uploads
@@ -36,8 +36,7 @@ class LoginForm(FlaskForm):
 class RegisterForm(FlaskForm):
     email = EmailField('Email', validators=[Email()])
     password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords must match')
+        DataRequired(), EqualTo('confirm', message='Passwords must match')
     ])
     confirm = PasswordField('Repeat Password')
     is_admin = BooleanField()

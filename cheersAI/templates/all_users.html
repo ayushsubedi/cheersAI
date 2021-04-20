@@ -1,48 +1,67 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="section">
-<div class="columns">
-  <div class="column">
-    <h1 class="title">Users</h1>
-    <h2 class="subtitle">Users Record</h2>
+  <div class="columns">
+    <div class="column">
+      <h1 class="title">Users</h1>
+      <h2 class="subtitle">Users Record</h2>
+      </div>
+    <div class="column">
+      <div class="field is-grouped is-pulled-right">
+        <p class="control">
+          <div class="buttons is-right">
+            <a href="/register" class="button is-link">New User</a>
+          </div>
+        </p>
+        <p class="control">
+          <button class="button">
+            Download
+          </button>
+        </p>
+      </div>
     </div>
-  <div class="column">
-    <div class="field is-grouped is-pulled-right">
-      <p class="control">
-        <button id="btn" class="button is-link">
-          New User
-        </button>
-      </p>
-      <p class="control">
-        <button class="button">
-          Download
-        </button>
-      </p>
-    </div>
+  </div>
+</section>
+<section class="section">
+<div class="b-table">
+  <div class="table-wrapper has-mobile-cards">
+    
+
+<table id="table_users" class="table is-fullwidth is-striped is-hoverable">
+  <thead>
+      <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Created at</th>
+          <th>Updated at</th>
+          <th>Actions</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for user in userss %}
+    <tr>
+      <td data-label="ID"> {{ user.id }} </td>
+      <td data-label="Email"> {{ user.email }} </td>
+      <td data-label="Created at"> <small class="has-text-grey">{{ user.date_create.strftime('%Y-%m-%d') }}</small> </td>
+      <td data-label="Updated at"> <small class="has-text-grey">{{ user.date_update.strftime('%Y-%m-%d') }}</small> </td>
+      <td class="is-actions-cell" data-label="Actions"> 
+        <a href={{ url_for("user", user_id=user.id) }}><i class="fas fa-eye"></i> </a> 
+        <a href={{ url_for("user_delete", user_id=user.id) }}><i class="far fa-trash-alt"></i></a>
+      </td>
+        
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
   </div>
 </div>
 </section>
-
-<div class="modal" id="myModal">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Modal title</p>
-      <button class="delete" aria-label="close" data-bulma-modal="close"></button>
-    </header>
-    <section class="modal-card-body">
-      <p>There is something here</p>
-    </section>
-    <footer class="modal-card-foot">
-      <button class="button is-success">Save changes</button>
-      <button class="button" data-bulma-modal="close">Cancel</button>
-    </footer>
-  </div>
-</div>
-
-
 {% endblock %}
 
 {% block javascript %}
-<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script>
+  $(document).ready( function () {
+    $('#table_users').DataTable();
+} );
+</script>
 {% endblock %}

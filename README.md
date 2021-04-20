@@ -32,8 +32,8 @@
 - [x] create, read, delete DR
 - [x] Create a page for patient's history
 - [x] Separate left and right images
-- [ ] Login 
-- [ ] Register
+- [x] Login 
+- [x] Register
 
 #### Engineering
 - [x] Identify patient tracking
@@ -43,8 +43,9 @@
 - [x] Temporarily deploy on mysql (test) to check if schema match
 - [ ] Identify other engineering todos
 
-#### APIs
-- [ ] create list of APIs required
+#### Authentication
+- [ ] use basic auth to create users
+- [ ] use sessions and email/passwords for users 
 
 #### SCHEMA
 - [x] PATIENT

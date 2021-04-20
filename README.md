@@ -46,6 +46,7 @@
 #### Authentication
 - [ ] use basic auth to create users
 - [ ] use sessions and email/passwords for users 
+- [ ] create a flag for admins
 
 #### SCHEMA
 - [x] PATIENT

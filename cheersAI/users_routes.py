@@ -4,7 +4,7 @@ from cheersAI.forms import LoginForm, RegisterForm
 from cheersAI.models import User
 from cheersAI import db
 from cheersAI import basic_auth
-
+import hashlib
 
 @application.route("/all_users", methods=['GET'])
 @basic_auth.required
@@ -21,7 +21,7 @@ def login():
         email = request.form['email']
         password = request.form['password']
         user = User.query.filter_by(email=email).first_or_404()
-        if (user.password==password):
+        if (user.password==hashlib.md5(password.encode()).hexdigest()):
             flash (f"Login Successful.", "success")
             session_user = {"email": user.email, "is_admin": user.is_admin}
             session['user'] = session_user
@@ -42,18 +42,21 @@ def logout():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
+        if (len(request.form['password'])<8):
+            flash (f"Password is too short. Please make sure it is at least 8 characters long.", "danger")
+            return render_template('register.html', form=form)
         new_user = User(
             email = request.form['email'],
-            password = request.form['password'],
+            password = hashlib.md5(str(request.form['password']).encode()).hexdigest(),
             is_admin = request.form.get('is_admin', '')=='y')
         try:
             db.session.add(new_user)
             db.session.commit()
             flash (f"User created successfully.", "success")
-            return redirect(url_for('index'))
+            return redirect(url_for('all_users'))
         except Exception as e:
             flash (f"Something went wrong."+str(e), "danger")
-            return redirect(url_for('index'))    
+            return redirect(url_for('all_users'))    
     return render_template('register.html', form=form)
 
 

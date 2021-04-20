@@ -28,9 +28,8 @@
 - [x] create input fields for PATIENT table name, age, gender, address, country, cheersID
 - [x] segregate PATIENT with other forms
 - [x] create, read, update, delete PATIENT
-- [ ] create, read, delete USER
-- [x] DR UPLOAD
-- [x] DR DELETE
+- [x] create, read, delete USER
+- [ ] create, read, delete DR
 - [x] Create a page for patient's history
 - [x] Separate left and right images
 - [ ] login 

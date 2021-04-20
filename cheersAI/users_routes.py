@@ -1,5 +1,5 @@
 from cheersAI import application
-from flask import render_template, request, jsonify, flash, redirect, url_for
+from flask import render_template, request, jsonify, flash, redirect, url_for, session
 from cheersAI.forms import LoginForm, RegisterForm
 from cheersAI.models import User
 from cheersAI import db
@@ -19,9 +19,20 @@ def login():
     if form.validate_on_submit():
         email = request.form['email']
         password = request.form['password']
-        flash (f"Login Successful.", "success")
-        return redirect(url_for('index'))
+        user = User.query.filter_by(email=email).first_or_404()
+        if (user.password==password):
+            flash (f"Login Successful.", "success")
+            return redirect(url_for('index'))
+        else:
+            flash (f"Incorrect username or password.", "danger")
+            return render_template('login.html', form=form)
     return render_template('login.html', form=form)
+
+@application.route('/logout')
+def logout():
+    session.pop('user', None)
+    flash("Logout Successful!")
+    return redirect(url_for('login'))
 
 
 @application.route("/register", methods=['GET', 'POST'])
@@ -57,3 +68,5 @@ def user_delete(user_id):
         flash (f"Something went wrong."+str(e), "danger")
     finally:
         return redirect(url_for('all_users'))
+
+

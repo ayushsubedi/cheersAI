@@ -48,14 +48,21 @@
 
 
               <div class="fieldgroup">
-                <button class="button is-success">
-                  Login
-                </button>
-                <button class="button">
-                    Cancel
-                </button>
+                {{form.submit(class='button is-link')}}
+                <a href="/" class="button is-danger">Cancel</a>
               </div>
             </form>
+
+            {% with messages=get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="notification is-{{category}}">
+              <button class="delete" onclick="this.parentElement.style.display='none'" ></button>
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
           </div>
         </div>
       </div>

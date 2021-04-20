@@ -61,7 +61,7 @@
 - [x] Add swagger to the project for API documentation
 - [ ] Add Sphinx for project documentation
 - [ ] Add bearer authentication for API
-- [ ] Provide additional information on the interface and not just the prediction (probability, index, charts etc)
+- [x] Provide additional information on the interface and not just the prediction (probability, index, charts etc)
 - [x] Use bulma or tailwind for CSS
 - [ ] Identify more UI/API todos
 

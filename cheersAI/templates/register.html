@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section">
+<h1 class="title">{{ title }}</h1>
+
+<form method="POST" action="{{url_for('register')}}">
+   {{form.hidden_tag()}}
+
+   <div class="field is-inline-block-desktop">
+      {{form.email.label(class="label")}}
+      {% if form.email.errors %}
+         {{form.email(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
+      {{form.email(class="input")}}
+      {% endif %} 
+   </div>
+
+   <div class="field is-inline-block-desktop">
+      {{form.password.label(class="label")}}
+      {% if form.password.errors %}
+         {{form.password(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
+      {{form.password(class="input")}}
+      {% endif %} 
+   </div>
+
+   <div class="field is-inline-block-desktop">
+      {{form.confirm.label(class="label")}}
+      {% if form.confirm.errors %}
+         {{form.confirm(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.confirm.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
+      {{form.confirm(class="input")}}
+      {% endif %} 
+   </div>
+
+   <div class="field is-inline-block-desktop">
+      {{form.is_admin.label(class="label")}}
+      {% if form.is_admin.errors %}
+         {{form.is_admin(class="input is-danger")}}
+         <p class="help is-danger">
+            {% for error in form.is_admin.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+         </p>
+      {% else %}
+      {{form.is_admin(class="checkbox")}}
+      {% endif %} 
+   </div>
+
+
+   {{form.submit(class='button is-link')}}
+</form>
+</section>
+{% endblock %}

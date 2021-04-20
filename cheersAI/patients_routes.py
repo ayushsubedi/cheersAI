@@ -1,8 +1,8 @@
 from cheersAI import application
-from flask import render_template, request, jsonify, flash, redirect, url_for
+from flask import render_template, request, jsonify, flash, redirect, url_for, session
 from cheersAI.forms import PatientForm, DRForm
 from cheersAI.models import Patient, DR
-from cheersAI.helper import new_filename, transform_image
+from cheersAI.helper import new_filename, transform_image, login_required
 from cheersAI import db
 import pandas as pd
 from datetime import datetime
@@ -12,11 +12,14 @@ import ast
 DR_PATH = "cheersAI/static/uploaded_img/dr/"
 
 @application.route("/all_patients", methods=['GET'])
+@login_required
 def all_patients():
     patients = Patient.query.all()
     return render_template('all_patients.html', patients=patients)
+    
 
 @application.route("/patient/<patient_id>", methods=['GET', 'POST'])
+@login_required
 def patient(patient_id):
     drform = DRForm()
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
@@ -61,6 +64,7 @@ def patient(patient_id):
 
 
 @application.route("/patient/create", methods=['GET', 'POST'])
+@login_required
 def patient_create():
     form = PatientForm()
     if form.validate_on_submit():
@@ -86,6 +90,7 @@ def patient_create():
 
 
 @application.route("/patient/delete/<patient_id>", methods=['GET'])
+@login_required
 def patient_delete(patient_id):
     del_patient = Patient.query.filter_by(id=patient_id).first_or_404()
     delete_images = DR.__table__.delete().where(DR.patient_id == patient_id)
@@ -101,6 +106,7 @@ def patient_delete(patient_id):
 
 
 @application.route("/dr/delete/<dr_id>", methods=['GET'])
+@login_required
 def dr_delete(dr_id):
     del_dr = DR.query.filter_by(id=dr_id).first_or_404()
     try:
@@ -114,6 +120,7 @@ def dr_delete(dr_id):
 
 
 @application.route("/patient/edit/<patient_id>", methods=['GET', 'POST'])
+@login_required
 def patient_edit(patient_id):
     edit_patient = Patient.query.filter_by(id=patient_id).first_or_404()
     form = PatientForm(obj=edit_patient)

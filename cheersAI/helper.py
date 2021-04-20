@@ -10,23 +10,22 @@ import string
 import random
 import cv2
 import numpy as np
-
+from functools import wraps
+from flask import session
 
 input_size = 229
 
-class ben_color(object):
-   
-   #     Parameters
-   #    ----------
-   #   img: 2D numpy array
-   #         The original image with format of (h, w, c)
-    
-    def __call__(self, img, sigmaX=10):
-        """
-        :param img: PIL): Image 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get('user') is None:
+            return redirect(url_for('login', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
 
-        :return: Normalized image
-        """
+class ben_color(object):
+
+    def __call__(self, img, sigmaX=10):
 
         img = np.asarray(img)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)

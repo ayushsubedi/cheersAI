@@ -15,6 +15,7 @@ def all_users():
 
 @application.route("/login", methods=['GET', 'POST'])
 def login():
+    session.pop('user', None)
     form = LoginForm()
     if form.validate_on_submit():
         email = request.form['email']
@@ -22,6 +23,8 @@ def login():
         user = User.query.filter_by(email=email).first_or_404()
         if (user.password==password):
             flash (f"Login Successful.", "success")
+            session_user = {"email": user.email, "is_admin": user.is_admin}
+            session['user'] = session_user
             return redirect(url_for('index'))
         else:
             flash (f"Incorrect username or password.", "danger")
@@ -31,7 +34,6 @@ def login():
 @application.route('/logout')
 def logout():
     session.pop('user', None)
-    flash("Logout Successful!")
     return redirect(url_for('login'))
 
 

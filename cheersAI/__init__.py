@@ -9,7 +9,8 @@ from flask_sqlalchemy import SQLAlchemy
 application = Flask(__name__)
 basic_auth = BasicAuth(application)
 
-application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cheersai.db'
+# application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cheersai.db'
+application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://{username}:{password}@{server}:3306/Zput1YVxzL".format("Zput1YVxzL", "yTzmJC8ftj", "remotemysql.com")
 
 db = SQLAlchemy(application)
 # Secret key for form

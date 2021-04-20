@@ -46,7 +46,7 @@
 
 #### SCHEMA
 - [x] PATIENT
-- [ ] USER
+- [x] USER
 - [x] PATIENT_DIAGNOSIS_HISTORY
 
 

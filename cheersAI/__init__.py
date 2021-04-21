@@ -5,12 +5,15 @@ from flask_basicauth import BasicAuth
 from flasgger import Swagger
 from flask_sqlalchemy import SQLAlchemy
 
+import pymysql
+pymysql.install_as_MySQLdb()
+
 
 application = Flask(__name__)
 basic_auth = BasicAuth(application)
 
 # application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cheersai.db'
-application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://Zput1YVxzL:yTzmJC8ftj@remotemysql.com:3306/Zput1YVxzL"
+application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://O7bXLfCUEy:YMXDVMsGgg@remotemysql.com:3306/O7bXLfCUEy"
 
 db = SQLAlchemy(application)
 # Secret key for form

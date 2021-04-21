@@ -2,7 +2,6 @@ from flask import Flask
 import os
 from os import environ
 from flask_basicauth import BasicAuth
-from flasgger import Swagger
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -29,20 +28,6 @@ application.config['UPLOADED_IMAGES_ALLOW'] = set(['png', 'jpg', 'jpeg'])
 application.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
-template = {
-    "swagger": "2.0",
-    "info": {
-        "title": "cheersAI API Documentation",
-        "description": "APIs for cheersAI diabetic retinopathy and glaucoma prediction.",
-    }
-}
-
-application.config['SWAGGER'] = {
-    'title': 'CheersAI API',
-    'uiversion': 3
-}
-
-swagger = Swagger(application, template=template)
 from cheersAI import routes
 from cheersAI import models
 from cheersAI import patients_routes

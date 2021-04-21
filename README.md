@@ -16,38 +16,43 @@
 - [x] Create a mechanism for seemless transitioning when models are updated
 - [x] Create table schema
 - [x] incorporate datatable
-- [x] create a basic home page for portfolio purposes
-- [ ] Identify more engineering problems
-- [ ] Figure out ways to deploy for staging
-- [ ] research storage for images
 - [x] add email and phone number to patients table
 - [x] retrofit the priliminary model
+- [x] create a basic home page for portfolio purposes
+- [ ] Figure out ways to deploy for staging
+- [ ] research storage for images
+
 
 
 #### Forms
 - [x] create input fields for PATIENT table name, age, gender, address, country, cheersID
 - [x] segregate PATIENT with other forms
-- [x] SHOW, CREATE, EDIT, DELETE patients
-- [x] DR UPLOAD
-- [x] DR DELETE
-- [ ] GLAUCOMA UPLOAD
+- [x] create, read, update, delete PATIENT
+- [x] create, read, delete USER
+- [x] create, read, delete DR
 - [x] Create a page for patient's history
 - [x] Separate left and right images
+- [x] Login 
+- [x] Register
 
 #### Engineering
 - [x] Identify patient tracking
 - [ ] Create a simple dashboard 
 - [ ] Identify requirements for dashboard
-- [ ] Create a user auth system
+- [x] Create a user auth system
+- [x] Temporarily deploy on mysql (test) to check if schema match
 - [ ] Identify other engineering todos
 
-#### APIs
-- [ ] create list of APIs required
+#### Authentication
+- [x] use basic auth to create users
+- [x] use sessions and email/passwords for users 
+- [x] create a flag for admins
 
 #### SCHEMA
 - [x] PATIENT
-- [ ] USER
-- [x] PATIENT_DIAGNOSIS_HISTORY
+- [x] USER
+- [x] DR
+- [ ] GLAUCOMA
 
 
 #### User Interface/API
@@ -56,7 +61,7 @@
 - [x] Add swagger to the project for API documentation
 - [ ] Add Sphinx for project documentation
 - [ ] Add bearer authentication for API
-- [ ] Provide additional information on the interface and not just the prediction (probability, index, charts etc)
+- [x] Provide additional information on the interface and not just the prediction (probability, index, charts etc)
 - [x] Use bulma or tailwind for CSS
 - [ ] Identify more UI/API todos
 

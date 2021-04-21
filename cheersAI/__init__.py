@@ -5,8 +5,9 @@ from flask_basicauth import BasicAuth
 from flasgger import Swagger
 from flask_sqlalchemy import SQLAlchemy
 
-import pymysql
-pymysql.install_as_MySQLdb()
+
+# import pymysql
+# pymysql.install_as_MySQLdb()
 
 
 application = Flask(__name__)

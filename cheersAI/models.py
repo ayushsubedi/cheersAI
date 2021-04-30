@@ -25,6 +25,7 @@ class Patient(db.Model):
 
     def __setitem__(self, key, value):
         return setattr(self, key, value)
+    
 
 
 class DR(db.Model):

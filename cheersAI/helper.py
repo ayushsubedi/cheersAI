@@ -83,7 +83,7 @@ def transform_image(image_url):
         ])
     # url = "https://zenodo.org/record/4608087/files/model_conv.h5"
     # loaded_model = torch.utils.model_zoo.load_url(url, map_location=torch.device('cpu'))
-    loaded_model = torch.load('cheersAI/static/saved_models/inception_weights.h5', map_location=torch.device('cpu'))
+    loaded_model = torch.load('cheersAI/static/saved_models/24_inceptionnew.h5', map_location=torch.device('cpu'))
     loaded_model.eval()
     image = Image.open(image_url)
     return predict_image(image, loaded_model, test_transforms)

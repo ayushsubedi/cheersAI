@@ -23,10 +23,32 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+def findMinDiff(arr): 
+    arr = sorted(arr, reverse=True) 
+    return arr[0] - arr[1]
+
+def inference_meaning(row_list):
+    percent_threshold = 30
+    percent_threshold = 5
+    row_list = [float(i) for i in row_list]
+    if len(row_list)==0:
+        return ""
+    max_prob = max(row_list)
+    difference = findMinDiff(row_list)
+    if (max_prob<percent_threshold or difference<percent_threshold):
+        return "Consult an opthlmologist. Probability for the label is not high enough or two predictions are almost same."
+    return ""
+
+
+def inference(row_list):
+    for prediction in row_list:
+        prediction['left_inference'] = inference_meaning(prediction.get("prediction_left_all").split())
+        prediction['right_inference'] = inference_meaning(prediction.get("prediction_right_all").split())
+    return row_list
+
 class ben_color(object):
 
     def __call__(self, img, sigmaX=10):
-
         img = np.asarray(img)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = self.crop_image_from_gray(img)

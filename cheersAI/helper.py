@@ -28,7 +28,7 @@ def findMinDiff(arr):
     return arr[0] - arr[1]
 
 def inference_meaning(row_list):
-    percent_threshold = 40
+    percent_threshold = 30
     difference_threshold = 5
     row_list = [float(i) for i in row_list]
     if len(row_list)==0:

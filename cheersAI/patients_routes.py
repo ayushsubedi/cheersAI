@@ -2,12 +2,14 @@ from cheersAI import application
 from flask import render_template, request, jsonify, flash, redirect, url_for, session
 from cheersAI.forms import PatientForm, DRForm
 from cheersAI.models import Patient, DR
-from cheersAI.helper import new_filename, transform_image, login_required
+from cheersAI.helper import new_filename, transform_image, login_required, inference
 from cheersAI import db
 import pandas as pd
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import ast
+from sqlalchemy import inspect
+
 
 DR_PATH = "cheersAI/static/uploaded_img/dr/"
 
@@ -24,6 +26,7 @@ def patient(patient_id):
     drform = DRForm()
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
     drhistory = DR.query.filter_by(patient_id=patient_id).all()
+    dict_inference = inference([r.__dict__ for r in drhistory])
     if drform.validate_on_submit():
         if (drform.left_eye.data or drform.right_eye.data):
             prediction_left, prediction_right = -1, -1
@@ -60,7 +63,7 @@ def patient(patient_id):
         else:
             flash (f"Upload left or right eye image to proceed.", "danger")
             return redirect(url_for('patient', patient_id=patient_id))
-    return render_template('patient.html', patient=patient, drhistory=drhistory, drform=drform)
+    return render_template('patient.html', patient=patient, drhistory=dict_inference, drform=drform)
 
 
 @application.route("/patient/create", methods=['GET', 'POST'])

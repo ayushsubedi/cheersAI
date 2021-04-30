@@ -28,15 +28,15 @@ def findMinDiff(arr):
     return arr[0] - arr[1]
 
 def inference_meaning(row_list):
-    percent_threshold = 30
-    percent_threshold = 5
+    percent_threshold = 40
+    difference_threshold = 5
     row_list = [float(i) for i in row_list]
     if len(row_list)==0:
         return ""
     max_prob = max(row_list)
     difference = findMinDiff(row_list)
-    if (max_prob<percent_threshold or difference<percent_threshold):
-        return "Consult an opthlmologist. Probability for the label is not high enough or two predictions are almost same."
+    if (max_prob<percent_threshold or difference<difference_threshold):
+        return "Consult an opthlmologist. Predicted probability is not high enough or predictions for two grades are similar."
     return ""
 
 

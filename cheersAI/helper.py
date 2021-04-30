@@ -22,22 +22,25 @@ input_size = 229
 def variance_of_laplacian(image):
 	return cv2.Laplacian(image, cv2.CV_64F).var()
 
-def blurry_level_image(path):
+def image_is_blurry(path):
   try:
     image = cv2.imread(path)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     fm = variance_of_laplacian(gray)
-    return round(fm)
+    # print ("blurry", fm)
+    return (fm<10 or fm>200) 
   except:
-    return -1
+    return True
 
 
-def img_darkness(path):
+def image_is_dark(path):
   try:
     img = imageio.imread(path, as_gray=True)
-    return  round(np.mean(img))
+    val = np.mean(img)
+    # print ("dark", val)
+    return  (val<8 or val>110)
   except:
-    return -1
+    return True
 
 
 def login_required(f):

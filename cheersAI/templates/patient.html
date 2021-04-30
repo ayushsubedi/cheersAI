@@ -90,6 +90,7 @@
             </figure>
             {% if history.left_inference%}
             <div class="notification is-danger" style="position: absolute; z-index:1;">
+              <button class="delete" onclick="this.parentElement.style.display='none'" ></button>
               <small>{{history.left_inference}}</small>
            </div>
            {% endif %}

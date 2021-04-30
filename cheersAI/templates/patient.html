@@ -161,6 +161,12 @@
             <figure class="image is-3by2">
               <img src="{{ url_for('static', filename='uploaded_img/dr/')}}{{ history.image_right }}" alt="">
             </figure>
+            {% if history.right_inference%}
+            <div class="notification is-danger" style="position: absolute; z-index:1;">
+              <button class="delete" onclick="this.parentElement.style.display='none'" ></button>
+              <small>{{history.right_inference}}</small>
+           </div>
+           {% endif %}
               <div id="bar-chart">
                 <div class="graph">
                    <ul class="x-axis">

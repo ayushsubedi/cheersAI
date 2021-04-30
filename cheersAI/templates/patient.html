@@ -84,9 +84,15 @@
   <div class="column is-one-quarter-desktop is-half-tablet">
     <div class="card">
         <div class="card-image">
+          <h5 style="position: absolute; padding: 2%;" class="has-text-danger has-text-centered">{{history.left_inference}}</h5>
             <figure class="image is-3by2">
               <img src="{{ url_for('static', filename='uploaded_img/dr/')}}{{ history.image_left }}" alt="">
             </figure>
+            {% if history.left_inference%}
+            <div class="notification is-danger" style="position: absolute; z-index:1;">
+              <small>{{history.left_inference}}</small>
+           </div>
+           {% endif %}
               <div id="bar-chart">
                 <div class="graph">
                    <ul class="x-axis">
@@ -125,7 +131,7 @@
           <div class="content">
             <div>
               <div class="divider is-danger">DR Grade</div>
-              <small class="has-text-danger">{{history.left_inference}}</small>
+              
             </div>
             <h3 class="title is-3 has-text-centered">{{ history.prediction_left }}</h3>
           </div>

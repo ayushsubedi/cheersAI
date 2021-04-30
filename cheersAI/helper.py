@@ -81,8 +81,6 @@ def transform_image(image_url):
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
-    # url = "https://zenodo.org/record/4608087/files/model_conv.h5"
-    # loaded_model = torch.utils.model_zoo.load_url(url, map_location=torch.device('cpu'))
     loaded_model = torch.load('cheersAI/static/saved_models/24_inceptionnew.h5', map_location=torch.device('cpu'))
     loaded_model.eval()
     image = Image.open(image_url)

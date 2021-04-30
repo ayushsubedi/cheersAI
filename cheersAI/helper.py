@@ -12,8 +12,33 @@ import cv2
 import numpy as np
 from functools import wraps
 from flask import session
+from PIL import Image
+import cv2
+import imageio
 
 input_size = 229
+
+
+def variance_of_laplacian(image):
+	return cv2.Laplacian(image, cv2.CV_64F).var()
+
+def blurry_level_image(path):
+  try:
+    image = cv2.imread(path)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    fm = variance_of_laplacian(gray)
+    return round(fm)
+  except:
+    return -1
+
+
+def img_darkness(path):
+  try:
+    img = imageio.imread(path, as_gray=True)
+    return  round(np.mean(img))
+  except:
+    return -1
+
 
 def login_required(f):
     @wraps(f)

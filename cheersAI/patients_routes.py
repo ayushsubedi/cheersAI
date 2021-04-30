@@ -33,6 +33,7 @@ def patient(patient_id):
             prediction_left_all, prediction_right_all = "", ""
             left_eye_filename, right_eye_filename = "", ""
             if (drform.left_eye.data):
+                
                 left_eye_filename = secure_filename(drform.left_eye.data.filename)
                 left_eye_filename = new_filename(patient_id, "left", left_eye_filename)
                 drform.left_eye.data.save(DR_PATH + left_eye_filename)

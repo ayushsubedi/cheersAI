@@ -35,6 +35,10 @@
 - [x] Login 
 - [x] Register
 
+#### QA
+- [ ] Do not allow bad images (blurry/dark/bright) to be uploaded for prediction
+- [ ] Identify threshold for prediction 
+
 #### Engineering
 - [x] Identify patient tracking
 - [ ] Create a simple dashboard 

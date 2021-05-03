@@ -63,8 +63,8 @@
 - [x] Create a streamlit app
 - [x] Create a demoable app to predict DR
 - [x] Add swagger to the project for API documentation
-- [ ] Add Sphinx for project documentation
-- [ ] Add bearer authentication for API
+- [x] Add Sphinx for project documentation
+- [x] Add bearer authentication for API
 - [x] Provide additional information on the interface and not just the prediction (probability, index, charts etc)
 - [x] Use bulma or tailwind for CSS
 - [ ] Identify more UI/API todos

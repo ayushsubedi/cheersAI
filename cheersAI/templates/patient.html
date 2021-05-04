@@ -220,4 +220,190 @@
   {% endfor %}
 </div>
 
+<br><br>
+<h1 class="title">Glaucoma</h1>
+<h2 class="subtitle">Patient's History</h2>
+
+
+<form method="POST" action="" enctype="multipart/form-data">
+    {{glaucomaform.hidden_tag()}}
+    <div class="field-group">
+        <div class="field is-inline-block-desktop">
+          {{glaucomaform.left_eye.label(class="label")}}
+          {% if glaucomaform.left_eye.errors %}
+             {{glaucomaform.left_eye(class="input is-danger")}}
+             <p class="help is-danger">
+                {% for error in glaucomaform.left_eye.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+             </p>
+          {% else %}
+            {{glaucomaform.left_eye(class="input")}}
+          {% endif %}
+        </div>
+       
+          <div class="field is-inline-block-desktop">
+            {{glaucomaform.right_eye.label(class="label")}}
+            {% if glaucomaform.right_eye.errors %}
+               {{glaucomaform.right_eye(class="input is-danger")}}
+               <p class="help is-danger">
+                  {% for error in glaucomaform.right_eye.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+               </p>
+            {% else %}
+              {{glaucomaform.right_eye(class="input")}}
+            {% endif %}
+          </div>
+     </div>
+
+     {{glaucomaform.submit(class='button is-link')}}
+</form>
+
+<br><br>
+<div>
+  <div class="divider">Left Eye</div>
+</div>
+<div class="columns is-multiline">
+  {% for history in glaucomahistory | sort(attribute='date_create', reverse = True) %}
+  {% if history.image_left %}
+  <div class="column is-one-quarter-desktop is-half-tablet">
+    <div class="card">
+        <div class="card-image">
+          <h5 style="position: absolute; padding: 2%;" class="has-text-danger has-text-centered">{{history.left_inference}}</h5>
+            <figure class="image is-3by2">
+              <img src="{{ url_for('static', filename='uploaded_img/glaucoma/')}}{{ history.image_left }}" alt="">
+            </figure>
+            {% if history.left_inference%}
+            <div class="notification is-danger" style="position: absolute; z-index:1;">
+              <button class="delete" onclick="this.parentElement.style.display='none'" ></button>
+              <small>{{history.left_inference}}</small>
+           </div>
+           {% endif %}
+              <div id="bar-chart">
+                <div class="graph">
+                   <ul class="x-axis">
+                      <li><span>0</span></li>
+                      <li><span>1</span></li>
+                      <li><span>2</span></li>
+                      <li><span>3</span></li>
+                      <li><span>4</span></li>
+                   </ul>
+                   <ul class="y-axis">
+                      <li><span>100%</span></li>
+                      <li><span>75%</span></li>
+                      <li><span>50%</span></li>
+                      <li><span>25%</span></li>
+                      <li><span>0%</span></li>
+                   </ul>
+                   <div class="bars">
+                    {% set list_pred = history.prediction_left_all.split(' ') %}  
+                    {% for height in list_pred %}
+                      <div class="bar-group">
+                         <div class="bar bar-14 stat-2" style="height:{{ height }}%">
+                         </div>
+                      </div>
+                      {% endfor %}
+                   </div>
+                </div>
+             </div>
+            
+            <div class="card-content is-overlay is-clipped">
+              <span class="tag is-link">
+                {{history.date_create.strftime('%Y-%m-%d')}}
+              </span>       
+            </div>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <div>
+              <div class="divider is-danger">DR Grade</div>
+              
+            </div>
+            <h3 class="title is-3 has-text-centered">{{ history.prediction_left }}</h3>
+          </div>
+        </div>
+        {% if session.user.is_admin %}
+        <footer class="card-footer">
+          <a href={{ url_for("dr_delete", dr_id=history.id) }} class="card-footer-item">Delete</a>
+        </footer>
+        {% endif %}
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+
+
+<div>
+  <div class="divider">Right Eye</div>
+</div>
+<div class="columns is-multiline">
+  {% for history in glaucomahistory | sort(attribute='date_create', reverse = True) %}
+  {% if history.image_right %}
+  <div class="column is-one-quarter-desktop is-half-tablet">
+    <div class="card">
+        <div class="card-image">
+            <figure class="image is-3by2">
+              <img src="{{ url_for('static', filename='uploaded_img/glaucoma/')}}{{ history.image_right }}" alt="">
+            </figure>
+            {% if history.right_inference%}
+            <div class="notification is-danger" style="position: absolute; z-index:1;">
+              <button class="delete" onclick="this.parentElement.style.display='none'" ></button>
+              <small>{{history.right_inference}}</small>
+           </div>
+           {% endif %}
+              <div id="bar-chart">
+                <div class="graph">
+                   <ul class="x-axis">
+                      <li><span>0</span></li>
+                      <li><span>1</span></li>
+                      <li><span>2</span></li>
+                      <li><span>3</span></li>
+                      <li><span>4</span></li>
+                   </ul>
+                   <ul class="y-axis">
+                      <li><span>100%</span></li>
+                      <li><span>75%</span></li>
+                      <li><span>50%</span></li>
+                      <li><span>25%</span></li>
+                      <li><span>0%</span></li>
+                   </ul>
+                   <div class="bars">
+                    {% set list_pred = history.prediction_right_all.split(' ') %}  
+                    {% for height in list_pred %}
+                      <div class="bar-group">
+                         <div class="bar bar-14 stat-2" style="height:{{ height }}%">
+                         </div>
+                      </div>
+                      {% endfor %}
+                   </div>
+                </div>
+             </div>
+            
+            <div class="card-content is-overlay is-clipped">
+              <span class="tag is-link">
+                {{history.date_create.strftime('%Y-%m-%d')}}
+              </span>       
+            </div>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <div>
+              <div class="divider is-danger">DR Grade</div>
+            </div>
+            <h3 class="title is-3 has-text-centered">{{ history.prediction_right }}</h3>
+          </div>
+        </div>
+        {% if session.user.is_admin %}
+        <footer class="card-footer">
+          <a href={{ url_for("dr_delete", dr_id=history.id) }} class="card-footer-item">Delete</a>
+        </footer>
+        {% endif %}
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+
 {% endblock %}

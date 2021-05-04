@@ -2,7 +2,7 @@ from cheersAI import application
 from flask import render_template, request, jsonify, flash, redirect, url_for, session
 from cheersAI.forms import PatientForm, DRForm, GlaucomaForm
 from cheersAI.models import Patient, DR, Glaucoma
-from cheersAI.helper import new_filename, transform_image, login_required, inference, image_is_blurry, image_is_dark
+from cheersAI.helper import new_filename, transform_image, login_required, inference_dr, inference_glaucoma, image_is_blurry, image_is_dark
 from cheersAI import db
 import pandas as pd
 from datetime import datetime
@@ -30,11 +30,11 @@ def patient(patient_id):
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
     
     drhistory = DR.query.filter_by(patient_id=patient_id).all()
-    dict_dr_inference = inference([r.__dict__ for r in drhistory])
+    dict_dr_inference = inference_dr([r.__dict__ for r in drhistory])
     
     glaucomahistory = Glaucoma.query.filter_by(patient_id=patient_id).all()
     # TODO: inference 
-    dict_glaucoma_inference = [r.__dict__ for r in glaucomahistory]
+    dict_glaucoma_inference = inference_glaucoma([r.__dict__ for r in glaucomahistory])
 
     
     if drform.validate_on_submit():

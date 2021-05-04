@@ -56,7 +56,7 @@
 - [x] PATIENT
 - [x] USER
 - [x] DR
-- [ ] GLAUCOMA
+- [x] GLAUCOMA
 
 
 #### User Interface/API

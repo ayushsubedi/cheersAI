@@ -37,8 +37,8 @@
 - [x] Register
 
 #### QA
-- [ ] Do not allow bad images (blurry/dark/bright) to be uploaded for prediction
-- [ ] Identify threshold for prediction 
+- [x] Do not allow bad images (blurry/dark/bright) to be uploaded for prediction
+- [x] Identify threshold for prediction 
 
 #### Engineering
 - [x] Identify patient tracking

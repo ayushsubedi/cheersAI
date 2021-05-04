@@ -127,12 +127,11 @@ def predict_glaucoma_image(image, loaded_model, test_transforms):
 
 def transform_glaucoma_image(image_url):
     test_transforms = transforms.Compose([
-        ben_color(),
         transforms.Resize((input_size, input_size)),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
-    loaded_model = torch.load('cheersAI/static/saved_models/24_inceptionnew.h5', map_location=torch.device('cpu'))
+    loaded_model = torch.load('cheersAI/static/saved_models/glaucoma.h5', map_location=torch.device('cpu'))
     loaded_model.eval()
     image = Image.open(image_url)
     return predict_glaucoma_image(image, loaded_model, test_transforms)
@@ -159,7 +158,7 @@ def transform_dr_image(image_url):
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
-    loaded_model = torch.load('cheersAI/static/saved_models/24_inceptionnew.h5', map_location=torch.device('cpu'))
+    loaded_model = torch.load('cheersAI/static/saved_models/dr.h5', map_location=torch.device('cpu'))
     loaded_model.eval()
     image = Image.open(image_url)
     return predict_dr_image(image, loaded_model, test_transforms)

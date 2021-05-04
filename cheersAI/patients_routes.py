@@ -214,4 +214,4 @@ def patient_edit(patient_id):
             flash("Something went wrong."+str(e), "danger")
         finally:
             return redirect(url_for('all_patients'))
-    return render_template('create_patient.html', action='patient_edit', title="Update Patient", form=form, patient_id=patient_id)ß
+    return render_template('create_patient.html', action='patient_edit', title="Update Patient", form=form, patient_id=patient_id)

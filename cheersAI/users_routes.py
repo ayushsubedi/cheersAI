@@ -22,12 +22,12 @@ def login():
         password = request.form['password']
         user = User.query.filter_by(email=email).first_or_404()
         if (user.password==hashlib.md5(password.encode()).hexdigest()):
-            flash (f"Login Successful.", "success")
+            flash("Login Successful.", "success")
             session_user = {"email": user.email, "is_admin": user.is_admin}
             session['user'] = session_user
             return redirect(url_for('index'))
         else:
-            flash (f"Incorrect username or password.", "danger")
+            flash("Incorrect username or password.", "danger")
             return render_template('login.html', form=form)
     return render_template('login.html', form=form)
 
@@ -43,7 +43,7 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         if (len(request.form['password'])<8):
-            flash (f"Password is too short. Please make sure it is at least 8 characters long.", "danger")
+            flash("Password is too short. Please make sure it is at least 8 characters long.", "danger")
             return render_template('register.html', form=form)
         new_user = User(
             email = request.form['email'],
@@ -52,10 +52,10 @@ def register():
         try:
             db.session.add(new_user)
             db.session.commit()
-            flash (f"User created successfully.", "success")
+            flash("User created successfully.", "success")
             return redirect(url_for('all_users'))
         except Exception as e:
-            flash (f"Something went wrong."+str(e), "danger")
+            flash("Something went wrong."+str(e), "danger")
             return redirect(url_for('all_users'))    
     return render_template('register.html', form=form)
 
@@ -68,10 +68,8 @@ def user_delete(user_id):
     try:
         db.session.delete(del_user)
         db.session.commit()
-        flash (f"User deleted successfully.", "success")
+        flash("User deleted successfully.", "success")
     except Exception as e:
-        flash (f"Something went wrong."+str(e), "danger")
+        flash("Something went wrong."+str(e), "danger")
     finally:
         return redirect(url_for('all_users'))
-
-

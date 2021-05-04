@@ -36,7 +36,7 @@ def patient(patient_id):
     # TODO: inference 
     dict_glaucoma_inference = inference_glaucoma([r.__dict__ for r in glaucomahistory])
 
-    if glaucomaform.validate_on_submit():
+    if glaucomaform.validate_on_submit() and glaucomaform.submit_glaucoma.data:
         if (glaucomaform.left_eye.data or glaucomaform.right_eye.data):
             prediction_left, prediction_right = -1, -1
             prediction_left_all, prediction_right_all = "", ""
@@ -79,7 +79,7 @@ def patient(patient_id):
             flash (f"Upload left or right eye image to proceed.", "danger")
             return redirect(url_for('patient', patient_id=patient_id))
     
-    if drform.validate_on_submit():
+    if drform.validate_on_submit() and drform.submit_dr.data:
         if (drform.left_eye.data or drform.right_eye.data):
             prediction_left, prediction_right = -1, -1
             prediction_left_all, prediction_right_all = "", ""

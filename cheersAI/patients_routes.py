@@ -183,6 +183,20 @@ def dr_delete(dr_id):
         return redirect(url_for('patient', patient_id=del_dr.patient_id))
 
 
+@application.route("/glaucoma/delete/<glaucoma_id>", methods=['GET'])
+@login_required
+def glaucoma_delete(glaucoma_id):
+    del_glaucoma = Glaucoma.query.filter_by(id=glaucoma_id).first_or_404()
+    try:
+        db.session.delete(del_glaucoma)
+        db.session.commit()
+        flash (f"Glaucoma history deleted successfully.", "success")
+    except Exception as e:
+        flash (f"Something went wrong."+str(e), "danger")
+    finally:
+        return redirect(url_for('patient', patient_id=del_glaucoma.patient_id))
+
+
 @application.route("/patient/edit/<patient_id>", methods=['GET', 'POST'])
 @login_required
 def patient_edit(patient_id):

@@ -1,40 +1,38 @@
 from cheersAI import application
-from flask import render_template, request, jsonify, flash, redirect, url_for, session
+from flask import render_template, request, flash, redirect, url_for
 from cheersAI.forms import PatientForm, DRForm, GlaucomaForm
 from cheersAI.models import Patient, DR, Glaucoma
-from cheersAI.helper import new_filename, transform_dr_image, transform_glaucoma_image, login_required, inference_dr, inference_glaucoma, image_is_blurry, image_is_dark
+from cheersAI.helper import new_filename, transform_dr_image
+from cheersAI.helper import transform_glaucoma_image, login_required
+from cheersAI.helper import inference_dr, inference_glaucoma, image_is_blurry
+from cheersAI.helper import image_is_dark
 from cheersAI import db
-import pandas as pd
 from datetime import datetime
 from werkzeug.utils import secure_filename
-import ast
-from sqlalchemy import inspect
-
 
 DR_PATH = "cheersAI/static/uploaded_img/dr/"
 GLAUCOMA_PATH = "cheersAI/static/uploaded_img/glaucoma/"
+
 
 @application.route("/all_patients", methods=['GET'])
 @login_required
 def all_patients():
     patients = Patient.query.all()
     return render_template('all_patients.html', patients=patients)
-    
+
 
 @application.route("/patient/<patient_id>", methods=['GET', 'POST'])
 @login_required
 def patient(patient_id):
     drform = DRForm()
-    glaucomaform = GlaucomaForm()
-    
+    glaucomaform = GlaucomaForm()    
     patient = Patient.query.filter_by(id=patient_id).first_or_404()
-    
     drhistory = DR.query.filter_by(patient_id=patient_id).all()
     dict_dr_inference = inference_dr([r.__dict__ for r in drhistory])
-    
     glaucomahistory = Glaucoma.query.filter_by(patient_id=patient_id).all()
-    # TODO: inference 
-    dict_glaucoma_inference = inference_glaucoma([r.__dict__ for r in glaucomahistory])
+    # TODO: inference
+    dict_glaucoma_inference = inference_glaucoma(
+        [r.__dict__ for r in glaucomahistory])
 
     if glaucomaform.validate_on_submit() and glaucomaform.submit_glaucoma.data:
         if (glaucomaform.left_eye.data or glaucomaform.right_eye.data):
@@ -42,41 +40,48 @@ def patient(patient_id):
             prediction_left_all, prediction_right_all = "", ""
             left_eye_filename, right_eye_filename = "", ""
             if (glaucomaform.left_eye.data):
-                left_eye_filename = secure_filename(glaucomaform.left_eye.data.filename)
-                left_eye_filename = new_filename(patient_id, "left", left_eye_filename)
-                glaucomaform.left_eye.data.save(GLAUCOMA_PATH + left_eye_filename)
-                if (image_is_dark(GLAUCOMA_PATH + left_eye_filename) or image_is_blurry(GLAUCOMA_PATH + left_eye_filename)):
-                    flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
+                left_eye_filename = secure_filename(
+                    glaucomaform.left_eye.data.filename)
+                left_eye_filename = new_filename(
+                    patient_id, "left", left_eye_filename)
+                glaucomaform.left_eye.data.save(
+                    GLAUCOMA_PATH + left_eye_filename)
+                if (image_is_dark(
+                    GLAUCOMA_PATH + left_eye_filename) or image_is_blurry(
+                        GLAUCOMA_PATH + left_eye_filename)):
+                    flash("Image is not up to the par. It is either dark/bright or blurry.", "danger")
                     return redirect(url_for('patient', patient_id=patient_id))
-                prediction_left_all, prediction_left = transform_glaucoma_image(GLAUCOMA_PATH + left_eye_filename)
+                prediction_left_all, prediction_left = transform_glaucoma_image(
+                    GLAUCOMA_PATH + left_eye_filename)
 
             if (glaucomaform.right_eye.data):
                 right_eye_filename = secure_filename(glaucomaform.right_eye.data.filename)
                 right_eye_filename = new_filename(patient_id, "right", right_eye_filename)
                 glaucomaform.right_eye.data.save(GLAUCOMA_PATH + right_eye_filename)
                 if (image_is_dark(GLAUCOMA_PATH + right_eye_filename) or image_is_blurry(GLAUCOMA_PATH + right_eye_filename)):
-                    flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
+                    flash("Image is not up to the par. It is either dark/bright or blurry.", "danger")
                     return redirect(url_for('patient', patient_id=patient_id))
-                prediction_right_all, prediction_right = transform_glaucoma_image(GLAUCOMA_PATH + right_eye_filename)
+                prediction_right_all, prediction_right = transform_glaucoma_image(
+                    GLAUCOMA_PATH + right_eye_filename)
 
             new_glaucoma = Glaucoma(
-                patient_id = patient_id,
-                prediction_left = prediction_left,
-                prediction_left_all = prediction_left_all,
-                image_left = left_eye_filename,
-                prediction_right = prediction_right,
-                prediction_right_all = prediction_right_all,
-                image_right = right_eye_filename)
+                patient_id=patient_id,
+                prediction_left=prediction_left,
+                prediction_left_all=prediction_left_all,
+                image_left=left_eye_filename,
+                prediction_right=prediction_right,
+                prediction_right_all=prediction_right_all,
+                image_right=right_eye_filename)
             try:
                 db.session.add(new_glaucoma)
                 db.session.commit()
-                flash (f"Added to patient history successfully.", "success")
+                flash("Added to patient history successfully.", "success")
             except Exception as e:
-                flash (f"Something went wrong."+str(e), "danger")
+                flash("Something went wrong."+str(e), "danger")
             finally:
                 return redirect(url_for('patient', patient_id=patient_id))
         else:
-            flash (f"Upload left or right eye image to proceed.", "danger")
+            flash("Upload left or right eye image to proceed.", "danger")
             return redirect(url_for('patient', patient_id=patient_id))
     
     if drform.validate_on_submit() and drform.submit_dr.data:
@@ -89,7 +94,7 @@ def patient(patient_id):
                 left_eye_filename = new_filename(patient_id, "left", left_eye_filename)
                 drform.left_eye.data.save(DR_PATH + left_eye_filename)
                 if (image_is_dark(DR_PATH + left_eye_filename) or image_is_blurry(DR_PATH + left_eye_filename)):
-                    flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
+                    flash("Image is not up to the par. It is either dark/bright or blurry.", "danger")
                     return redirect(url_for('patient', patient_id=patient_id))
                 prediction_left_all, prediction_left = transform_dr_image(DR_PATH + left_eye_filename)
 
@@ -98,30 +103,30 @@ def patient(patient_id):
                 right_eye_filename = new_filename(patient_id, "right", right_eye_filename)
                 drform.right_eye.data.save(DR_PATH + right_eye_filename)
                 if (image_is_dark(DR_PATH + right_eye_filename) or image_is_blurry(DR_PATH + right_eye_filename)):
-                    flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
+                    flash("Image is not up to the par. It is either dark/bright or blurry.", "danger")
                     return redirect(url_for('patient', patient_id=patient_id))
                 prediction_right_all, prediction_right = transform_dr_image(DR_PATH + right_eye_filename)
 
             new_dr = DR(
-                patient_id = patient_id,
-                prediction_left = prediction_left,
-                prediction_left_all = prediction_left_all,
-                image_left = left_eye_filename,
-                prediction_right = prediction_right,
-                prediction_right_all = prediction_right_all,
-                image_right = right_eye_filename)
+                patient_id=patient_id,
+                prediction_left=prediction_left,
+                prediction_left_all=prediction_left_all,
+                image_left=left_eye_filename,
+                prediction_right=prediction_right,
+                prediction_right_all=prediction_right_all,
+                image_right=right_eye_filename)
             try:
                 db.session.add(new_dr)
                 db.session.commit()
-                flash (f"Added to patient history successfully.", "success")
+                flash("Added to patient history successfully.", "success")
             except Exception as e:
-                flash (f"Something went wrong."+str(e), "danger")
+                flash("Something went wrong."+str(e), "danger")
             finally:
                 return redirect(url_for('patient', patient_id=patient_id))
         else:
-            flash (f"Upload left or right eye image to proceed.", "danger")
+            flash("Upload left or right eye image to proceed.", "danger")
             return redirect(url_for('patient', patient_id=patient_id))
-    return render_template('patient.html', patient=patient, drhistory=dict_dr_inference, drform=drform, glaucomahistory=dict_glaucoma_inference, glaucomaform=glaucomaform)
+    return render_template('patient.html', patient=patient,drhistory=dict_dr_inference, drform=drform, glaucomahistory=dict_glaucoma_inference, glaucomaform=glaucomaform)
 
 
 @application.route("/patient/create", methods=['GET', 'POST'])
@@ -142,11 +147,11 @@ def patient_create():
         try:
             db.session.add(new_patient)
             db.session.commit()
-            flash (f"Patient created successfully.", "success")
+            flash("Patient created successfully.", "success")
             return redirect(url_for('patient', patient_id=new_patient.id))
         except Exception as e:
-            flash (f"Something went wrong."+str(e), "danger")
-            return redirect(url_for('all_patients'))    
+            flash("Something went wrong."+str(e), "danger")
+            return redirect(url_for('all_patients'))
     return render_template('create_patient.html', title="Create New Patient", action='patient_create', form=form)
 
 
@@ -159,9 +164,9 @@ def patient_delete(patient_id):
         db.session.delete(del_patient)
         db.session.execute(delete_images)
         db.session.commit()
-        flash (f"Patient deleted successfully.", "success")
+        flash("Patient deleted successfully.", "success")
     except Exception as e:
-        flash (f"Something went wrong."+str(e), "danger")
+        flash("Something went wrong."+str(e), "danger")
     finally:
         return redirect(url_for('all_patients'))
 
@@ -173,9 +178,9 @@ def dr_delete(dr_id):
     try:
         db.session.delete(del_dr)
         db.session.commit()
-        flash (f"DR history deleted successfully.", "success")
+        flash("DR history deleted successfully.", "success")
     except Exception as e:
-        flash (f"Something went wrong."+str(e), "danger")
+        flash("Something went wrong."+str(e), "danger")
     finally:
         return redirect(url_for('patient', patient_id=del_dr.patient_id))
 
@@ -187,9 +192,9 @@ def glaucoma_delete(glaucoma_id):
     try:
         db.session.delete(del_glaucoma)
         db.session.commit()
-        flash (f"Glaucoma history deleted successfully.", "success")
+        flash("Glaucoma history deleted successfully.", "success")
     except Exception as e:
-        flash (f"Something went wrong."+str(e), "danger")
+        flash("Something went wrong."+str(e), "danger")
     finally:
         return redirect(url_for('patient', patient_id=del_glaucoma.patient_id))
 
@@ -204,10 +209,9 @@ def patient_edit(patient_id):
         edit_patient['date_update'] = datetime.utcnow()
         try:
             db.session.commit()
-            flash (f"Patient updated successfully.", "success")
+            flash("Patient updated successfully.", "success")
         except Exception as e:
-            flash (f"Something went wrong."+str(e), "danger")
+            flash("Something went wrong."+str(e), "danger")
         finally:
             return redirect(url_for('all_patients'))
     return render_template('create_patient.html', action='patient_edit', title="Update Patient", form=form, patient_id=patient_id)
-

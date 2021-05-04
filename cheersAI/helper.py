@@ -1,26 +1,21 @@
 from PIL import Image
 from torch.autograd import Variable
 import torch
-import torch.optim as optim
 from torchvision import transforms
-import time
-import os
-import copy
 import string
 import random
 import cv2
 import numpy as np
 from functools import wraps
-from flask import session
-from PIL import Image
-import cv2
+from flask import session, redirect, url_for, request
 import imageio
 
 input_size = 229
 
 
 def variance_of_laplacian(image):
-	return cv2.Laplacian(image, cv2.CV_64F).var()
+    return cv2.Laplacian(image, cv2.CV_64F).var()
+
 
 def image_is_blurry(path):
   try:
@@ -28,7 +23,7 @@ def image_is_blurry(path):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     fm = variance_of_laplacian(gray)
     # print ("blurry", fm)
-    return (fm<10 or fm>200) 
+    return (fm < 10 or fm > 200) 
   except:
     return True
 
@@ -38,7 +33,7 @@ def image_is_dark(path):
     img = imageio.imread(path, as_gray=True)
     val = np.mean(img)
     # print ("dark", val)
-    return  (val<8 or val>110)
+    return (val < 8 or val > 110)
   except:
     return True
 
@@ -51,9 +46,11 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+
 def findMinDiff(arr): 
     arr = sorted(arr, reverse=True) 
     return arr[0] - arr[1]
+
 
 def inference_meaning(row_list):
     percent_threshold = 30
@@ -74,8 +71,10 @@ def inference_dr(row_list):
         prediction['right_inference'] = inference_meaning(prediction.get("prediction_right_all").split())
     return row_list
 
+
 def inference_glaucoma(row_list):
     return row_list
+
 
 class ben_color(object):
 
@@ -108,8 +107,10 @@ class ben_color(object):
     def __repr__(self):
         return self.__class__.__name__+'()'
 
+
 def new_filename(patient_id, eye, safe_name):
     return patient_id+'_'+eye+'_'+''.join(random.choice(string.ascii_lowercase) for i in range(10))+'.'+safe_name.split('.')[1]
+
 
 def predict_glaucoma_image(image, loaded_model, test_transforms):
     image_tensor = test_transforms(image).float()
@@ -124,6 +125,7 @@ def predict_glaucoma_image(image, loaded_model, test_transforms):
     norm = [round(100*i/sum(norm), 2) for i in norm]
     pred = x.index(max(x))
     return " ".join(map(str, norm)), pred
+
 
 def transform_glaucoma_image(image_url):
     test_transforms = transforms.Compose([
@@ -151,6 +153,7 @@ def predict_dr_image(image, loaded_model, test_transforms):
     pred = x.index(max(x))
     return " ".join(map(str, norm)), pred
 
+
 def transform_dr_image(image_url):
     test_transforms = transforms.Compose([
         ben_color(),
@@ -162,6 +165,7 @@ def transform_dr_image(image_url):
     loaded_model.eval()
     image = Image.open(image_url)
     return predict_dr_image(image, loaded_model, test_transforms)
+
 
 def all_countries():
     return ['Nepal',

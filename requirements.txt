@@ -2,6 +2,7 @@ attrs==20.3.0
 click==7.1.2
 dnspython==2.1.0
 email-validator==1.1.2
+flake8==3.9.1
 flasgger==0.9.5
 Flask==1.1.2
 Flask-BasicAuth==0.2.0
@@ -18,11 +19,14 @@ itsdangerous==1.1.0
 Jinja2==2.11.3
 jsonschema==3.2.0
 MarkupSafe==1.1.1
+mccabe==0.6.1
 mistune==0.8.4
 numpy==1.20.2
 opencv-python==4.5.1.48
 pandas==1.2.3
 Pillow==8.2.0
+pycodestyle==2.7.0
+pyflakes==2.3.1
 PyMySQL==1.0.2
 pyrsistent==0.17.3
 python-dateutil==2.8.1

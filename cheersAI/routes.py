@@ -1,6 +1,5 @@
 from cheersAI import application
-from flask import render_template, request
-from cheersAI.helper import login_required
+from flask import render_template
 
 
 @application.route('/')

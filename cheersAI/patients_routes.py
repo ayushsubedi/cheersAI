@@ -121,10 +121,6 @@ def patient(patient_id):
         else:
             flash (f"Upload left or right eye image to proceed.", "danger")
             return redirect(url_for('patient', patient_id=patient_id))
-
-
-
-
     return render_template('patient.html', patient=patient, drhistory=dict_dr_inference, drform=drform, glaucomahistory=dict_glaucoma_inference, glaucomaform=glaucomaform)
 
 

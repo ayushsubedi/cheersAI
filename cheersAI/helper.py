@@ -111,8 +111,7 @@ class ben_color(object):
 def new_filename(patient_id, eye, safe_name):
     return patient_id+'_'+eye+'_'+''.join(random.choice(string.ascii_lowercase) for i in range(10))+'.'+safe_name.split('.')[1]
 
-
-def predict_image(image, loaded_model, test_transforms):
+def predict_glaucoma_image(image, loaded_model, test_transforms):
     image_tensor = test_transforms(image).float()
     image_tensor = image_tensor.unsqueeze_(0)
     _input = Variable(image_tensor)
@@ -126,18 +125,43 @@ def predict_image(image, loaded_model, test_transforms):
     pred = x.index(max(x))
     return " ".join(map(str, norm)), pred
 
-def transform_image(image_url):
+def transform_glaucoma_image(image_url):
+    test_transforms = transforms.Compose([
+        transforms.Resize((input_size, input_size)),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        ])
+    loaded_model = torch.load('cheersAI/static/saved_models/glaucoma.h5', map_location=torch.device('cpu'))
+    loaded_model.eval()
+    image = Image.open(image_url)
+    return predict_glaucoma_image(image, loaded_model, test_transforms)
 
+
+def predict_dr_image(image, loaded_model, test_transforms):
+    image_tensor = test_transforms(image).float()
+    image_tensor = image_tensor.unsqueeze_(0)
+    _input = Variable(image_tensor)
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    _input = _input.to(device)
+    output = loaded_model(_input)
+    x = output.data.cpu().numpy()[0]
+    x = [float(i) for i in x]
+    norm = [(i-min(x))/(max(x)-min(x)) for i in x]
+    norm = [round(100*i/sum(norm), 2) for i in norm]
+    pred = x.index(max(x))
+    return " ".join(map(str, norm)), pred
+
+def transform_dr_image(image_url):
     test_transforms = transforms.Compose([
         ben_color(),
         transforms.Resize((input_size, input_size)),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
-    loaded_model = torch.load('cheersAI/static/saved_models/24_inceptionnew.h5', map_location=torch.device('cpu'))
+    loaded_model = torch.load('cheersAI/static/saved_models/dr.h5', map_location=torch.device('cpu'))
     loaded_model.eval()
     image = Image.open(image_url)
-    return predict_image(image, loaded_model, test_transforms)
+    return predict_dr_image(image, loaded_model, test_transforms)
 
 def all_countries():
     return ['Nepal',

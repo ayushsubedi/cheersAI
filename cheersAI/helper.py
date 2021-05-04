@@ -68,10 +68,13 @@ def inference_meaning(row_list):
     return ""
 
 
-def inference(row_list):
+def inference_dr(row_list):
     for prediction in row_list:
         prediction['left_inference'] = inference_meaning(prediction.get("prediction_left_all").split())
         prediction['right_inference'] = inference_meaning(prediction.get("prediction_right_all").split())
+    return row_list
+
+def inference_glaucoma(row_list):
     return row_list
 
 class ben_color(object):

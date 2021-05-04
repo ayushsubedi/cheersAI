@@ -1,6 +1,6 @@
-from cheersAI import application
 from cheersAI import db
 from datetime import datetime
+
 
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,8 +15,7 @@ class Patient(db.Model):
     email = db.Column(db.String(255), nullable=True)
     date_create = db.Column(db.DateTime, default=datetime.utcnow)
     date_update = db.Column(db.DateTime, default=datetime.utcnow)
-   
-
+ 
     def __repr__(self):
         return f"<id={self.id}>"
 
@@ -25,7 +24,6 @@ class Patient(db.Model):
 
     def __setitem__(self, key, value):
         return setattr(self, key, value)
-    
 
 
 class DR(db.Model):
@@ -85,4 +83,3 @@ class User(db.Model):
 
     def __setitem__(self, key, value):
         return setattr(self, key, value)
-    

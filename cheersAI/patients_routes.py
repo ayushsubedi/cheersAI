@@ -2,7 +2,7 @@ from cheersAI import application
 from flask import render_template, request, jsonify, flash, redirect, url_for, session
 from cheersAI.forms import PatientForm, DRForm, GlaucomaForm
 from cheersAI.models import Patient, DR, Glaucoma
-from cheersAI.helper import new_filename, transform_image, login_required, inference_dr, inference_glaucoma, image_is_blurry, image_is_dark
+from cheersAI.helper import new_filename, transform_dr_image, transform_glaucoma_image, login_required, inference_dr, inference_glaucoma, image_is_blurry, image_is_dark
 from cheersAI import db
 import pandas as pd
 from datetime import datetime
@@ -48,7 +48,7 @@ def patient(patient_id):
                 if (image_is_dark(GLAUCOMA_PATH + left_eye_filename) or image_is_blurry(GLAUCOMA_PATH + left_eye_filename)):
                     flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
                     return redirect(url_for('patient', patient_id=patient_id))
-                prediction_left_all, prediction_left = transform_image(GLAUCOMA_PATH + left_eye_filename)
+                prediction_left_all, prediction_left = transform_glaucoma_image(GLAUCOMA_PATH + left_eye_filename)
 
             if (glaucomaform.right_eye.data):
                 right_eye_filename = secure_filename(glaucomaform.right_eye.data.filename)
@@ -57,7 +57,7 @@ def patient(patient_id):
                 if (image_is_dark(GLAUCOMA_PATH + right_eye_filename) or image_is_blurry(GLAUCOMA_PATH + right_eye_filename)):
                     flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
                     return redirect(url_for('patient', patient_id=patient_id))
-                prediction_right_all, prediction_right = transform_image(GLAUCOMA_PATH + right_eye_filename)
+                prediction_right_all, prediction_right = transform_glaucoma_image(GLAUCOMA_PATH + right_eye_filename)
 
             new_glaucoma = Glaucoma(
                 patient_id = patient_id,
@@ -91,7 +91,7 @@ def patient(patient_id):
                 if (image_is_dark(DR_PATH + left_eye_filename) or image_is_blurry(DR_PATH + left_eye_filename)):
                     flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
                     return redirect(url_for('patient', patient_id=patient_id))
-                prediction_left_all, prediction_left = transform_image(DR_PATH + left_eye_filename)
+                prediction_left_all, prediction_left = transform_dr_image(DR_PATH + left_eye_filename)
 
             if (drform.right_eye.data):
                 right_eye_filename = secure_filename(drform.right_eye.data.filename)
@@ -100,7 +100,7 @@ def patient(patient_id):
                 if (image_is_dark(DR_PATH + right_eye_filename) or image_is_blurry(DR_PATH + right_eye_filename)):
                     flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
                     return redirect(url_for('patient', patient_id=patient_id))
-                prediction_right_all, prediction_right = transform_image(DR_PATH + right_eye_filename)
+                prediction_right_all, prediction_right = transform_dr_image(DR_PATH + right_eye_filename)
 
             new_dr = DR(
                 patient_id = patient_id,

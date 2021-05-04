@@ -42,11 +42,9 @@
 
 #### Engineering
 - [x] Identify patient tracking
-- [ ] Create a simple dashboard 
-- [ ] Identify requirements for dashboard
 - [x] Create a user auth system
 - [x] Temporarily deploy on mysql (test) to check if schema match
-- [ ] Identify other engineering todos
+- [x] Identify other engineering todos
 
 #### Authentication
 - [x] use basic auth to create users

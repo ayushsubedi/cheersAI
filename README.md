@@ -19,7 +19,6 @@
 - [x] add email and phone number to patients table
 - [x] retrofit the priliminary model
 - [x] create a basic home page for portfolio purposes
-- [ ] Figure out ways to deploy for staging
 - [ ] research storage for images
 
 

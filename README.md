@@ -30,6 +30,7 @@
 - [x] create, read, update, delete PATIENT
 - [x] create, read, delete USER
 - [x] create, read, delete DR
+- [x] create, read, delete GLAUCOMA
 - [x] Create a page for patient's history
 - [x] Separate left and right images
 - [x] Login 

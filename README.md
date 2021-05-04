@@ -67,7 +67,7 @@
 - [x] Add bearer authentication for API
 - [x] Provide additional information on the interface and not just the prediction (probability, index, charts etc)
 - [x] Use bulma or tailwind for CSS
-- [ ] Identify more UI/API todos
+
 
 # Installation
 

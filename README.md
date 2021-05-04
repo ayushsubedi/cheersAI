@@ -20,6 +20,7 @@
 - [x] retrofit the priliminary model
 - [x] create a basic home page for portfolio purposes
 - [ ] research storage for images
+- [ ] figure out ssh
 
 
 

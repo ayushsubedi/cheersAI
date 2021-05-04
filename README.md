@@ -38,7 +38,8 @@
 
 #### QA
 - [x] Do not allow bad images (blurry/dark/bright) to be uploaded for prediction
-- [x] Identify threshold for prediction 
+- [x] Identify threshold for prediction (DR)
+- [ ] Identify threshold for prediction (Glaucoma)
 
 #### Engineering
 - [x] Identify patient tracking

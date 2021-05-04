@@ -71,7 +71,7 @@
           </div>
      </div>
 
-     {{drform.submit(class='button is-link')}}
+     {{drform.submit_dr(class='button is-link')}}
 </form>
 
 <br><br>
@@ -257,7 +257,7 @@
           </div>
      </div>
 
-     {{glaucomaform.submit(class='button is-link')}}
+     {{glaucomaform.submit_glaucoma(class='button is-link')}}
 </form>
 
 <br><br>
@@ -317,7 +317,7 @@
         <div class="card-content">
           <div class="content">
             <div>
-              <div class="divider is-danger">DR Grade</div>
+              <div class="divider is-danger">Glaucoma</div>
               
             </div>
             <h3 class="title is-3 has-text-centered">{{ history.prediction_left }}</h3>
@@ -325,7 +325,7 @@
         </div>
         {% if session.user.is_admin %}
         <footer class="card-footer">
-          <a href={{ url_for("dr_delete", dr_id=history.id) }} class="card-footer-item">Delete</a>
+          <a href={{ url_for("glaucoma_delete", glaucoma_id=history.id) }} class="card-footer-item">Delete</a>
         </footer>
         {% endif %}
     </div>
@@ -397,7 +397,7 @@
         </div>
         {% if session.user.is_admin %}
         <footer class="card-footer">
-          <a href={{ url_for("dr_delete", dr_id=history.id) }} class="card-footer-item">Delete</a>
+          <a href={{ url_for("glaucoma_delete", glaucoma_id=history.id) }} class="card-footer-item">Delete</a>
         </footer>
         {% endif %}
     </div>

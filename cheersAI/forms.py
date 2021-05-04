@@ -26,12 +26,12 @@ class PatientForm(FlaskForm):
 class DRForm(FlaskForm):
     left_eye = FileField('Left Eye', validators=[FileAllowed(images, 'Incorrect file type. Upload accepts images only.')])
     right_eye = FileField('Right Eye', validators=[FileAllowed(images, 'Incorrect file type. Upload accepts images only.')])
-    submit  = SubmitField('Predict')
+    submit_dr  = SubmitField('Predict DR')
 
 class GlaucomaForm(FlaskForm):
     left_eye = FileField('Left Eye', validators=[FileAllowed(images, 'Incorrect file type. Upload accepts images only.')])
     right_eye = FileField('Right Eye', validators=[FileAllowed(images, 'Incorrect file type. Upload accepts images only.')])
-    submit  = SubmitField('Predict')
+    submit_glaucoma  = SubmitField('Predict Glaucoma')
 
 class LoginForm(FlaskForm):
     email = EmailField('Email', validators=[Email()])

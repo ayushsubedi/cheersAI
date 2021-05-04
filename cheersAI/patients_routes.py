@@ -36,8 +36,50 @@ def patient(patient_id):
     # TODO: inference 
     dict_glaucoma_inference = inference_glaucoma([r.__dict__ for r in glaucomahistory])
 
+    if glaucomaform.validate_on_submit() and glaucomaform.submit_glaucoma.data:
+        if (glaucomaform.left_eye.data or glaucomaform.right_eye.data):
+            prediction_left, prediction_right = -1, -1
+            prediction_left_all, prediction_right_all = "", ""
+            left_eye_filename, right_eye_filename = "", ""
+            if (glaucomaform.left_eye.data):
+                left_eye_filename = secure_filename(glaucomaform.left_eye.data.filename)
+                left_eye_filename = new_filename(patient_id, "left", left_eye_filename)
+                glaucomaform.left_eye.data.save(GLAUCOMA_PATH + left_eye_filename)
+                if (image_is_dark(GLAUCOMA_PATH + left_eye_filename) or image_is_blurry(GLAUCOMA_PATH + left_eye_filename)):
+                    flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
+                    return redirect(url_for('patient', patient_id=patient_id))
+                prediction_left_all, prediction_left = transform_image(GLAUCOMA_PATH + left_eye_filename)
+
+            if (glaucomaform.right_eye.data):
+                right_eye_filename = secure_filename(glaucomaform.right_eye.data.filename)
+                right_eye_filename = new_filename(patient_id, "right", right_eye_filename)
+                glaucomaform.right_eye.data.save(GLAUCOMA_PATH + right_eye_filename)
+                if (image_is_dark(GLAUCOMA_PATH + right_eye_filename) or image_is_blurry(GLAUCOMA_PATH + right_eye_filename)):
+                    flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
+                    return redirect(url_for('patient', patient_id=patient_id))
+                prediction_right_all, prediction_right = transform_image(GLAUCOMA_PATH + right_eye_filename)
+
+            new_glaucoma = Glaucoma(
+                patient_id = patient_id,
+                prediction_left = prediction_left,
+                prediction_left_all = prediction_left_all,
+                image_left = left_eye_filename,
+                prediction_right = prediction_right,
+                prediction_right_all = prediction_right_all,
+                image_right = right_eye_filename)
+            try:
+                db.session.add(new_glaucoma)
+                db.session.commit()
+                flash (f"Added to patient history successfully.", "success")
+            except Exception as e:
+                flash (f"Something went wrong."+str(e), "danger")
+            finally:
+                return redirect(url_for('patient', patient_id=patient_id))
+        else:
+            flash (f"Upload left or right eye image to proceed.", "danger")
+            return redirect(url_for('patient', patient_id=patient_id))
     
-    if drform.validate_on_submit():
+    if drform.validate_on_submit() and drform.submit_dr.data:
         if (drform.left_eye.data or drform.right_eye.data):
             prediction_left, prediction_right = -1, -1
             prediction_left_all, prediction_right_all = "", ""
@@ -81,48 +123,7 @@ def patient(patient_id):
             return redirect(url_for('patient', patient_id=patient_id))
 
 
-    if glaucomaform.validate_on_submit():
-        if (glaucomaform.left_eye.data or glaucomaform.right_eye.data):
-            prediction_left, prediction_right = -1, -1
-            prediction_left_all, prediction_right_all = "", ""
-            left_eye_filename, right_eye_filename = "", ""
-            if (glaucomaform.left_eye.data):
-                left_eye_filename = secure_filename(glaucomaform.left_eye.data.filename)
-                left_eye_filename = new_filename(patient_id, "left", left_eye_filename)
-                glaucomaform.left_eye.data.save(GLAUCOMA_PATH + left_eye_filename)
-                if (image_is_dark(GLAUCOMA_PATH + left_eye_filename) or image_is_blurry(GLAUCOMA_PATH + left_eye_filename)):
-                    flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
-                    return redirect(url_for('patient', patient_id=patient_id))
-                prediction_left_all, prediction_left = transform_image(GLAUCOMA_PATH + left_eye_filename)
 
-            if (glaucomaform.right_eye.data):
-                right_eye_filename = secure_filename(glaucomaform.right_eye.data.filename)
-                right_eye_filename = new_filename(patient_id, "right", right_eye_filename)
-                glaucomaform.right_eye.data.save(GLAUCOMA_PATH + right_eye_filename)
-                if (image_is_dark(GLAUCOMA_PATH + right_eye_filename) or image_is_blurry(GLAUCOMA_PATH + right_eye_filename)):
-                    flash (f"Image is not up to the par. It is either dark/bright or blurry.", "danger")
-                    return redirect(url_for('patient', patient_id=patient_id))
-                prediction_right_all, prediction_right = transform_image(GLAUCOMA_PATH + right_eye_filename)
-
-            new_glaucoma = Glaucoma(
-                patient_id = patient_id,
-                prediction_left = prediction_left,
-                prediction_left_all = prediction_left_all,
-                image_left = left_eye_filename,
-                prediction_right = prediction_right,
-                prediction_right_all = prediction_right_all,
-                image_right = right_eye_filename)
-            try:
-                db.session.add(new_glaucoma)
-                db.session.commit()
-                flash (f"Added to patient history successfully.", "success")
-            except Exception as e:
-                flash (f"Something went wrong."+str(e), "danger")
-            finally:
-                return redirect(url_for('patient', patient_id=patient_id))
-        else:
-            flash (f"Upload left or right eye image to proceed.", "danger")
-            return redirect(url_for('patient', patient_id=patient_id))
 
     return render_template('patient.html', patient=patient, drhistory=dict_dr_inference, drform=drform, glaucomahistory=dict_glaucoma_inference, glaucomaform=glaucomaform)
 

@@ -325,7 +325,7 @@
         </div>
         {% if session.user.is_admin %}
         <footer class="card-footer">
-          <a href={{ url_for("glaucoma_delete", dr_id=history.id) }} class="card-footer-item">Delete</a>
+          <a href={{ url_for("glaucoma_delete", glaucoma_id=history.id) }} class="card-footer-item">Delete</a>
         </footer>
         {% endif %}
     </div>
@@ -397,7 +397,7 @@
         </div>
         {% if session.user.is_admin %}
         <footer class="card-footer">
-          <a href={{ url_for("glaucoma_delete", dr_id=history.id) }} class="card-footer-item">Delete</a>
+          <a href={{ url_for("glaucoma_delete", glaucoma_id=history.id) }} class="card-footer-item">Delete</a>
         </footer>
         {% endif %}
     </div>

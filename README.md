@@ -5,6 +5,7 @@
 
 #### Installation
 - [ ] install ubuntu
+- [ ] install nginx, mysql, python dev tools
 
 
 #### Preliminary

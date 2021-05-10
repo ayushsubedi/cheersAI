@@ -7,6 +7,7 @@
 - [ ] install ubuntu
 - [ ] install nginx, mysql, python dev tools
 - [ ] get domain
+- [ ] get certbot
 
 
 #### Preliminary

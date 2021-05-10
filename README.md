@@ -3,6 +3,10 @@
 
 # Todos
 
+#### Installation
+- [ ] install ubuntu
+
+
 #### Preliminary
 - [x] create specification document
 - [x] create architecture requirements (ubuntu, nginx, mysql)

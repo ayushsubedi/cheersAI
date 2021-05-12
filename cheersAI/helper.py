@@ -121,14 +121,13 @@ def predict_glaucoma_image(image, loaded_model, test_transforms):
     output = loaded_model(_input)
     x = output.data.cpu().numpy()[0]
     x = [float(i) for i in x]
-    norm = [(i-min(x))/(max(x)-min(x)) for i in x]
-    norm = [round(100*i/sum(norm), 2) for i in norm]
     pred = x.index(max(x))
-    return " ".join(map(str, norm)), pred
+    return " ".join(map(str, x)), pred
 
 
 def transform_glaucoma_image(image_url):
     test_transforms = transforms.Compose([
+        ben_color(),
         transforms.Resize((input_size, input_size)),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])

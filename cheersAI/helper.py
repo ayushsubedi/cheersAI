@@ -32,7 +32,6 @@ def image_is_dark(path):
   try:
     img = imageio.imread(path, as_gray=True)
     val = np.mean(img)
-    # print ("dark", val)
     return (val < 8 or val > 110)
   except:
     return True

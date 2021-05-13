@@ -21,7 +21,7 @@ def login():
         email = request.form['email']
         password = request.form['password']
         user = User.query.filter_by(email=email).first_or_404()
-        if (user.password==hashlib.md5(password.encode()).hexdigest()):
+        if (user.password == hashlib.md5(password.encode()).hexdigest()):
             flash("Login Successful.", "success")
             session_user = {"email": user.email, "is_admin": user.is_admin}
             session['user'] = session_user
@@ -46,9 +46,9 @@ def register():
             flash("Password is too short. Please make sure it is at least 8 characters long.", "danger")
             return render_template('register.html', form=form)
         new_user = User(
-            email = request.form['email'],
-            password = hashlib.md5(str(request.form['password']).encode()).hexdigest(),
-            is_admin = request.form.get('is_admin', '')=='y')
+            email=request.form['email'],
+            password=hashlib.md5(str(request.form['password']).encode()).hexdigest(),
+            is_admin=request.form.get('is_admin', '') == 'y')
         try:
             db.session.add(new_user)
             db.session.commit()

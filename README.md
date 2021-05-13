@@ -4,7 +4,7 @@
 # Todos
 
 #### Installation
-- [ ] install ubuntu
+- [x] install ubuntu
 - [ ] install nginx, mysql, python dev tools
 - [ ] setup gunicorn
 - [ ] get domain

@@ -5,7 +5,7 @@
 
 #### Installation
 - [x] install ubuntu
-- [ ] install nginx, mysql, python dev tools
+- [x] install nginx, mysql, python dev tools
 - [ ] setup gunicorn
 - [ ] get domain
 - [ ] get certbot

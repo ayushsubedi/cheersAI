@@ -1,7 +1,9 @@
 from flask import Flask
 import os
+from os.path import join, dirname
 from os import environ
 from flask_basicauth import BasicAuth
+from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
@@ -20,6 +22,9 @@ sentry_sdk.init(
 
 application = Flask(__name__)
 basic_auth = BasicAuth(application)
+
+dotenv_path = join(dirname(__file__),'..','.env')
+load_dotenv(dotenv_path)
 
 application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cheersai.db'
 # application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://O7bXLfCUEy:YMXDVMsGgg@remotemysql.com:3306/O7bXLfCUEy"

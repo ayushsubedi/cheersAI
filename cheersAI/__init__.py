@@ -3,11 +3,20 @@ import os
 from os import environ
 from flask_basicauth import BasicAuth
 from flask_sqlalchemy import SQLAlchemy
-
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 # import pymysql
 # pymysql.install_as_MySQLdb()
+sentry_sdk.init(
+    dsn="https://13ddaefce4a44877ae4ff3ab2ccf76a9@o717172.ingest.sentry.io/5779777",
+    integrations=[FlaskIntegration()],
 
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0
+)
 
 application = Flask(__name__)
 basic_auth = BasicAuth(application)

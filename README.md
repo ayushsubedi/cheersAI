@@ -80,6 +80,7 @@
 - [x] Provide additional information on the interface and not just the prediction (probability, index, charts etc)
 - [x] Probability index for Glaucoma (2 levels)
 - [x] Use bulma or tailwind for CSS
+- [ ] add meta tags
 
 
 # Installation

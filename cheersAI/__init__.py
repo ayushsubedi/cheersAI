@@ -26,8 +26,8 @@ basic_auth = BasicAuth(application)
 dotenv_path = join(dirname(__file__),'..','.env')
 load_dotenv(dotenv_path)
 
-application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cheersai.db'
-# application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://O7bXLfCUEy:YMXDVMsGgg@remotemysql.com:3306/O7bXLfCUEy"
+# application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cheersai.db'
+application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://drg:S,FrEf3(eHsc5.f_`)@localhost:3306/drg"
 
 db = SQLAlchemy(application)
 # Secret key for form

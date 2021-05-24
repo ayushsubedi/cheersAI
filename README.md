@@ -10,7 +10,7 @@
 - [x] prepare the server
 - [x] get domain
 - [x] get certbot
-- [ ] https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-20-04
+- [x] https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-20-04
 
 
 #### Preliminary

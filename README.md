@@ -11,8 +11,8 @@
 - [x] get domain
 - [x] get certbot
 - [x] https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-20-04
-- [ ] increase upload file size
-- [ ] include proxy_params; in location of virtual.conf for routing error 
+- [x] increase upload file size
+- [x] include proxy_params; in location of virtual.conf for routing error 
 
 
 #### Preliminary

@@ -32,7 +32,7 @@
 - [x] retrofit the priliminary model
 - [x] create a basic home page for portfolio purposes
 - [x] research storage for images (local)
-- [ ] figure out ssh
+- [x] figure out ssh
 
 
 
@@ -80,7 +80,7 @@
 - [x] Provide additional information on the interface and not just the prediction (probability, index, charts etc)
 - [x] Probability index for Glaucoma (2 levels)
 - [x] Use bulma or tailwind for CSS
-- [ ] add meta tags
+- [x] add meta tags
 
 
 # Installation

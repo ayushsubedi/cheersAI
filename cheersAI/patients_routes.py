@@ -16,6 +16,7 @@ GLAUCOMA_PATH = "cheersAI/static/uploaded_img/glaucoma/"
 
 
 @application.route("/download_patients", methods=['GET'])
+@login_required
 def download_patients():
     patients = Patient.query.all()
     patients_dict = [r.__dict__ for r in patients]

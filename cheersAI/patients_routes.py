@@ -1,5 +1,5 @@
 from cheersAI import application
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect, url_for, Response
 from cheersAI.forms import PatientForm, DRForm, GlaucomaForm
 from cheersAI.models import Patient, DR, Glaucoma
 from cheersAI.helper import new_filename, transform_dr_image
@@ -9,10 +9,22 @@ from cheersAI.helper import image_is_dark
 from cheersAI import db
 from datetime import datetime
 from werkzeug.utils import secure_filename
+import pandas as pd
 
 DR_PATH = "cheersAI/static/uploaded_img/dr/"
 GLAUCOMA_PATH = "cheersAI/static/uploaded_img/glaucoma/"
 
+
+@application.route("/download_patients", methods=['GET'])
+def download_patients():
+    patients = Patient.query.all()
+    patients_dict = [r.__dict__ for r in patients]
+    df = pd.DataFrame.from_dict(patients_dict)
+    return Response(
+        df.iloc[:,1:].to_csv(index=False),
+        mimetype="text/csv",
+        headers={"Content-disposition":
+        "attachment; filename=patients.csv"})
 
 @application.route("/all_patients", methods=['GET'])
 @login_required

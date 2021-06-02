@@ -8,8 +8,9 @@ from flask_sqlalchemy import SQLAlchemy
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
 
-import pymysql
-pymysql.install_as_MySQLdb()
+# import pymysql
+# pymysql.install_as_MySQLdb()
+
 sentry_sdk.init(
     dsn="https://13ddaefce4a44877ae4ff3ab2ccf76a9@o717172.ingest.sentry.io/5779777",
     integrations=[FlaskIntegration()],
@@ -26,8 +27,8 @@ basic_auth = BasicAuth(application)
 dotenv_path = join(dirname(__file__),'..','.env')
 load_dotenv(dotenv_path)
 
-# application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cheersai.db'
-application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://drg:drg!@##@!@localhost:3306/drg"
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cheersai.db'
+# application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://drg:drg!@##@!@localhost:3306/drg"
 
 db = SQLAlchemy(application)
 # Secret key for form

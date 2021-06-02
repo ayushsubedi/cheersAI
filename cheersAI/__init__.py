@@ -8,8 +8,8 @@ from flask_sqlalchemy import SQLAlchemy
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
 
-# import pymysql
-# pymysql.install_as_MySQLdb()
+import pymysql
+pymysql.install_as_MySQLdb()
 
 sentry_sdk.init(
     dsn="https://13ddaefce4a44877ae4ff3ab2ccf76a9@o717172.ingest.sentry.io/5779777",

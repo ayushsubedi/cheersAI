@@ -172,10 +172,12 @@ def patient_create():
 @login_required
 def patient_delete(patient_id):
     del_patient = Patient.query.filter_by(id=patient_id).first_or_404()
-    delete_images = DR.__table__.delete().where(DR.patient_id == patient_id)
+    delete_images_dr = DR.__table__.delete().where(DR.patient_id == patient_id)
+    delete_images_g = Glaucoma.__table__.delete().where(Glaucoma.patient_id == patient_id)
     try:
         db.session.delete(del_patient)
-        db.session.execute(delete_images)
+        db.session.execute(delete_images_dr)
+        db.session.execute(delete_images_g)
         db.session.commit()
         flash("Patient deleted successfully.", "success")
     except Exception as e:

@@ -64,8 +64,25 @@ def inference_meaning(row_list):
     return ""
 
 
+def dr_meaning(pred):
+    pred = int(pred)
+    if pred==0:
+        return "No DR"
+    if pred==1:
+       return "Mild DR"
+    if pred==2:
+        return "Moderate DR"
+    if pred==3:
+        return "Severe DR"
+    if pred==4:
+        return "Proliferative DR"
+    return pred
+
+
 def inference_dr(row_list):
     for prediction in row_list:
+        prediction['prediction_left'] = dr_meaning(prediction.get('prediction_left'))
+        prediction['prediction_right'] = dr_meaning(prediction.get('prediction_right'))
         prediction['left_inference'] = inference_meaning(prediction.get("prediction_left_all").split())
         prediction['right_inference'] = inference_meaning(prediction.get("prediction_right_all").split())
     return row_list

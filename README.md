@@ -1,6 +1,4 @@
 
-![Image of Yaktocat](https://github.com/CHEERS-Hospital/cheersAI/blob/main/cheersAI/static/img/logo.png?raw=true)
-
 ![](https://cheersai.ml/static/img/demo.png)
 # Todos
 
